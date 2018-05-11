@@ -14,6 +14,14 @@ Copyright (c) Microsoft Corporation. All rights reserved
     <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
     <!-- WinJS references -->
     <link href="../css/ui-dark.css?v1.0.143" rel="stylesheet" />
+
+
+    <style >              
+
+        .win-pivot-header {
+            font-size:x-small !important;
+        }
+    </style>
 	
     <script src="../js/base.min.js"></script>	
     <script src="../js/ui.min.js?v1.0.143" id='1'></script>	
@@ -385,11 +393,22 @@ function clockStop() {
           
             <div data-win-control="WinJS.UI.Hub"  >
                  
-                <div class="hero sectionlist margint" data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'templates',isHeaderStatic: true}">
-                  <iframe src="Templates.htm" width="99%" height="95%">
-                        <p>Your browser does not support iframes.</p>
-                    </iframe>     
-				   
+                <div class="hero sectionlist margint" data-win-control="WinJS.UI.HubSection" data-win-options="{header: '',isHeaderStatic: true}">
+
+                    <div id="messageList" data-win-control="WinJS.UI.Pivot" data-win-options="{ selectedIndex: 0 }">
+
+                        <div class="pivotItem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Templates' }" style="font-size:xx-small">
+                            <iframe src="Templates.htm?source=template" width="99%" height="95%">
+                                <p>Your browser does not support iframes.</p>
+                            </iframe>
+                        </div>
+                        <div class="pivotItem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Documents' }" style="font-size:xx-small">
+                            <iframe src="Templates.htm?source=documents" width="99%" height="95%">
+                                <p>Your browser does not support iframes.</p>
+                            </iframe>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="hero sectionbug" style="overflow:hidden;"  data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'Composition',isHeaderStatic: true}">
                    

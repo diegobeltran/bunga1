@@ -19,14 +19,15 @@
     <!--<link rel="stylesheet" href="../css/cosmo/bootstrap.min.css" type="text/css">-->
     <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="../css/style.css" type="text/css">
-	<script>
+	
+    <script>
 
-        //var _data=getAllUrlParams().data;
+        var _source=getAllUrlParams().source;
         ///de aca se escoje la fuente
 
        //cargar al eligir si son tempaltes, codigos etc.
-
-        var _source = "documents";
+        //alert(_data);
+        //var _source = "documents";
         var pathsource = "../data/" + _source + ".js?v = " + ramdonversion();
         dynamicInsert2(pathsource);
 
