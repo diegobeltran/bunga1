@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://winjs.azurewebsites.net/immersiveViewer.html -->
+<html class="win-hoverable"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>WinJS Sample</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script>
+     
+    </script>
+
+    <link href="../css/ui-dark.css" rel="stylesheet">
+  
+    <script src="../winjs/base.min.js"></script>
+    <script src="../winjs/ui.min.js"></script><style></style>
+     <link href="../css/listView.css" rel="stylesheet" />
+ 
+    <style>
+/* Template for headers in the zoomed-in ListView */
+.simpleHeaderItem
+{
+    width: 50px;
+    height: 70px;
+    padding: 1px;
+    top:-50px;
+    font-size: 1em;
+    
+}   
+
+/* Template for items in the zoomed-in ListView */  
+ .mediumListIconTextItem {
+	width: 120px;
+	height: calc(100% - 38px);
+	border: 1px solid silver;
+	margin-top: 4px;
+    height: 140px;
+}
+
+.mediumListIconTextItem.wide {
+	min-width: 120px;
+	width: calc(100% - 5px);
+}
+
+    .mediumListIconTextItem img.mediumListIconTextItem-Image 
+    {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        -ms-grid-column: 1;
+          color: #fff;
+    }
+
+    .mediumListIconTextItem .mediumListIconTextItem-Detail
+    {
+        margin: 0px;
+        -ms-grid-column: 2;
+    }
+
+/* Template for items in the zoomed-out ListView */
+.semanticZoomItem
+{
+    width: 130px;
+    height: 130px;
+    background-color: rgba(38, 160, 218, 1.0);
+}   
+
+    .semanticZoomItem .semanticZoomItem-Text
+    {
+        padding: 10px;
+        line-height: 120px;
+        white-space: nowrap;
+        color: white;
+    }
+
+/* CSS for the zoomed-in ListView */
+#zoomedInListView
+{
+  width: 100%;
+    height: 100%;
+    border: solid 2px rgba(0, 0, 0, 0.13);
+}
+
+#semanticZoomDiv 
+{
+    margin-top:10%; 
+    width: 100%;
+    height: 90%;
+    border: solid 2px rgba(0, 0, 0, 0.13);
+    
+}
+
+.minus{
+    
+    width:auto;
+    float:right;
+    font-size:3em;
+    margin-left:40px;
+    border:1px;
+    text-align :right;
+    vertical-align: top;
+    z-index: 100;
+    top:-15%;
+    margin-bottom:150px;
+    
+}
+</style>
+
+<script>
+    
+    (function () {
+    "use strict";
+
+
+    
+    var myData = [
+    { title: "Domestic Animals", text: "Mascots and others",category: "Animals", picture: "../images/fruits/60Banana.png" },
+    { title: "Deep Space", text: "Planets, ufo, and other spacial objects",category: "Science", picture: "../images/fruits/60Banana.png" },
+    { title: "Wild Animals", text: "Big Cats informations",category: "Animals", picture: "../images/fruits/60Banana.png" },
+    { title: "Jungle Animals", text: "Jungle Animals",category: "Animals", picture: "../images/fruits/60Banana.png" },
+    { title: "Vowels", text: "Vowels in languages",category: "Learning", picture: "../images/fruits/60Lemon.png" },
+    { title: "Numbers", text: "The numbers from one to ten",category: "Learning", picture: "../images/fruits/60Lemon.png" },
+    { title: "Christmas", text: "Christmas toon description",category: "Bible", picture: "../images/fruits/60Lemon.png" },
+    { title: "Surgery", text: "Like the operando",category: "Science",  picture: "../images/fruits/60Lemon.png" },
+    { title: "Rapid Food", text: "Rapid Food",category: "Food",  picture: "../images/fruits/60Mint.png" },
+    { title: "Colors", text: "Primary colors and others",category: "Learning",  picture: "../images/fruits/60Mint.png" },
+     { title: "Colors1", text: "Primary colors and others",category: "Learning",  picture: "../images/fruits/60Mint.png" },
+      { title: "Colors2", text: "Primary colors and others",category: "Learning",  picture: "../images/fruits/60Mint.png" },
+       { title: "Colors3", text: "Primary colors and others",category: "Learning",  picture: "../images/fruits/60Mint.png" }
+   
+    ];
+
+    // Create a WinJS.Binding.List from the array. 
+    var itemsList = new WinJS.Binding.List(myData);
+
+ // Sorts the groups.
+    function compareGroups(leftKey, rightKey) {
+        return leftKey.charCodeAt(0) - rightKey.charCodeAt(0);
+    }
+
+    // Returns the group key that an item belongs to.
+    function getGroupKey(dataItem) {
+        return dataItem.title.toUpperCase().charAt(0);
+    }
+
+    // Returns the title for a group.
+    function getGroupData(dataItem) {
+        return {
+            title: dataItem.title.toUpperCase().charAt(0)
+        };
+    }
+
+    // Create the groups for the ListView from the item data and the grouping functions
+    var groupedItemsList = itemsList.createGrouped(getGroupKey, getGroupData, compareGroups);
+    //Show the flyout
+    function showConfirmFlyout() {
+    
+    var sz= document.getElementById("semanticZoomDiv").winControl;
+    
+          sz.zoomedOut=true;
+    }
+    
+    WinJS.Namespace.define("myData",
+        {
+            groupedItemsList: groupedItemsList
+        }); 
+
+
+
+
+    WinJS.UI.processAll().then(function () {
+    document.getElementById("section1minus").addEventListener("click", showConfirmFlyout, false);
+ 
+    
+});
+
+ // WinJS.UI.processAll();  	
+
+})(); // End of data.js
+
+    
+</script>
+
+
+</head>
+<body style="width:100%;height:100%; background:#000;">
+    
+    <div style="position:fixed;top:-1%;width:100%;color:#0000ff">
+<a style="float:right;font-size:1.5em;" id="filter" href="">sorted alphabetically</a> 
+
+ <button id="section1minus" data-win-control="WinJS.UI.AppBarCommand" style="float:left" 
+ data-win-options="{id:'cmd',  icon:'remove'}" type="button"></button>
+ <button id="section1settings" data-win-control="WinJS.UI.AppBarCommand" style="float:left" 
+data-win-options="{id:'cmd',  icon:'settings'}" type="button"></button>
+ <!--    <span style="margin-left: -28px; font-size: 0.8em">Command 1</span> 
+
+<span class="minus" id="section1minus" href="#">-</span> -->
+</div>
+<!-- Template for the group headers in the zoomed-in view. -->
+<div id="headerTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+    <div class="simpleHeaderItem" style="top:-30px">
+        <h4 data-win-bind="innerText: title"></h4>
+    </div>
+</div>
+        
+<!-- Template for the ListView items in the zoomed-in view. -->
+<div id="mediumListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+    <div class="mediumListIconTextItem">
+        <img class="mediumListIconTextItem-Image" data-win-bind="src: picture" />
+        <div class="mediumListIconTextItem-Detail">
+            <div data-win-bind="innerText: title"></div>
+            <div data-win-bind="innerText: text"></div>
+        </div>
+    </div>
+</div>
+            
+<!-- Template for the zoomed out view of the semantic view. -->
+<div id="semanticZoomTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+    <div class="semanticZoomItem">
+        <h1 class="semanticZoomItem-Text" data-win-bind="innerText: title"></h1>
+    </div>
+</div>
+
+<div class="listIconTextTemplate" id="listIconTextTemplate" data-win-control="WinJS.Binding.Template"  style="display: none">
+              <img src="#" class="listIconTextItem-Image" data-win-bind="src: picture" />
+              <div class="listIconTextItem-Detail" >
+              <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+              <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+              </div>
+             </div>
+   
+
+      
+          
+ 
+<div id="semanticZoomDiv" data-win-control="WinJS.UI.SemanticZoom" data-win-options="{ zoomedOut : true}" >   
+       
+    <!-- The zoomed-in view.    
+    <div id="zoomedInListView"
+        data-win-control="WinJS.UI.ListView" 
+        data-win-options="{ itemDataSource: myData.groupedItemsList.dataSource,
+         itemTemplate: select('#listIconTextTemplate'), groupHeaderTemplate: 
+         select('#headerTemplate'), groupDataSource: myData.groupedItemsList.groups.dataSource, 
+         selectionMode: 'single', tapBehavior: 'directSelect', swipeBehavior: 'none',layout: {type: WinJS.UI.ListLayout}
+         }"
+    ></div>--> 
+
+     
+              <div class="listIconTextTemplate win-selectionstylefilled listView" id="listViewx"
+             data-win-control="WinJS.UI.ListView"
+             data-win-options="{ itemDataSource: myData.groupedItemsList.dataSource,
+         itemTemplate: select('.listIconTextTemplate'), groupHeaderTemplate: 
+         select('#headerTemplate'), groupDataSource: myData.groupedItemsList.groups.dataSource, 
+         selectionMode: 'single', tapBehavior: 'directSelect', swipeBehavior: 'none',layout: {type: WinJS.UI.ListLayout}
+         }">
+             </div>
+    
+
+
+     
+    <!--- The zoomed-out view. -->
+    
+    <div id="zoomedOutListView"
+        data-win-control="WinJS.UI.ListView"
+        data-win-options="{ itemDataSource: myData.groupedItemsList.groups.dataSource,
+         itemTemplate: select('#semanticZoomTemplate'), selectionMode: 'single',
+          tapBehavior: 'directSelect', swipeBehavior: 'none' }"
+    >
+ 
+    </div>
+   
+</div>
+
+
+</body></html>

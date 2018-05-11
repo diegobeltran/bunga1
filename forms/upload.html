@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JSON Editor Upload Example</title>
+     <link href="../css/ui-dark.css" rel="stylesheet">
+     <link href="dist/bootstrap.min.css" rel="stylesheet" />
+      <link href="dist/ general_foundicons.css" rel="stylesheet" />
+     <script src="../winjs/base.min.js"></script>
+    <script src="../winjs/ui.min.js"></script><style></style>
+    <script src="dist/jsoneditor.js"></script>
+  </head>
+  <body>
+    
+    
+    <div id='editor_holder'></div>
+    <output id="listupload"></output>
+    
+    <script>
+      // Specify theme
+      JSONEditor.defaults.options.theme = 'html';
+
+      // Specify upload handler
+      JSONEditor.defaults.options.upload = function(type, file, cbs) {
+       
+        if (type === 'root.upload_fail') cbs.failure('Upload failed');
+        else {
+          var tick = 0;
+
+          var tickFunction = function() {
+            tick += 1;
+            console.log('progress: ' + tick);
+
+            if (tick < 10) {
+              cbs.updateProgress(tick);
+              window.setTimeout(tickFunction, 10)
+            } else if (tick == 100) {
+              cbs.updateProgress();
+              window.setTimeout(tickFunction, 100)
+            } else 
+            {
+              cbs.success('http://www.example.com/images/' + file.name);
+              var name = editor.getEditor('root.name');
+              // `getEditor` will return null if the path is invalid
+              if(name) {
+              name.setValue(file.name);
+              }
+              //var span = document.createElement('span');
+             //span.innerHTML = ['<img class="thumb" src="', file,
+             //               '" title="', escape(file.name), '"/>'].join('');
+              //document.getElementById('list').insertBefore(span, null);
+             //var namex  = document.getElementsByTagName("input");//editor.getEditor('root.upload_custom_link');
+             
+             //var files = document.getElementById('image1').files;
+            
+              var node_list = document.getElementsByTagName('input');
+ 
+              for (var i = 0; i < node_list.length; i++) {
+                 var node = node_list[i];
+ 
+                 if (node.getAttribute('type') == 'file') 
+                 {
+                  // do something here with a <input type="text" .../>
+                  // we alert its value here
+                    //alert(node.files.length);
+                    //codigo del servicio
+                  }
+                 } 
+            
+            
+             //alert(namex.value);       
+              
+            }
+          };
+          window.setTimeout(tickFunction)
+        }
+      };
+
+      // Initialize the editor with a JSON schema
+      var editor = new JSONEditor(document.getElementById('editor_holder'),{
+        schema: {
+          type: "object",
+          title: "Image",
+          properties: 
+            {
+            upload_custom_link: {
+              type: "string",
+              format: "url",
+              title:"",
+              options: {
+                upload: true
+              },
+              links: [
+                {
+                  "href": "{{self}}",
+                  "rel": "view"
+                }
+              ]
+            },
+             name: {
+              type: "string",
+              minLength: 4,
+              default: "name of widget"
+            }
+           
+          }
+        }
+      });
+
+      editor.setValue({
+        name: "custom",
+        upload_custom_link: ""
+      });
+      
+     
+    </script>
+  </body>
+</html>

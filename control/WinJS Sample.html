@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://winjs.azurewebsites.net/immersiveViewer.html -->
+<html class="win-hoverable"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>WinJS Sample</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script>
+        (function () {
+
+            if (!window.opener) {
+                // This page only works when it can get configuration data from the window that
+                // opened it. If no window opened it, this page is useless so redirect to the
+                // main page.
+                window.location = "http://try.buildwinjs.com/";
+            }
+
+            var myOrigin = location.protocol + "//" + location.hostname +
+                (location.port ? ":" + location.port : "");
+
+            // Let the opener know we're loading as soon as possible before any timeouts
+            // it has set up expire. The opener uses the "loading" and "unload" messages
+            // in coordination with a timeout to distinguish between this window closing
+            // and refreshing.
+            window.opener.postMessage("loading", myOrigin);
+            window.onunload = function () {
+                window.opener.postMessage("unload", myOrigin);
+            };
+
+            // Can't use WinJS.Namespace.define because we haven't loaded WinJS yet
+            window.WinJSImmersiveViewer = window.WinJSImmersiveViewer || {};
+            WinJSImmersiveViewer.myOrigin = myOrigin;
+
+        })();
+    </script>
+
+    <link href="./WinJS Sample_files/ui-dark.css" rel="stylesheet">
+    <link href="./WinJS Sample_files/sandbox.css" rel="stylesheet">
+    <script src="./WinJS Sample_files/shimMO.js.descarga"></script>
+    <script src="./WinJS Sample_files/base.min.js.descarga"></script>
+    <script src="./WinJS Sample_files/ui.min.js.descarga"></script><style></style>
+    <script src="./WinJS Sample_files/sandboxNavigator.js.descarga"></script>
+    <link href="./WinJS Sample_files/customHighlightStyle.css" rel="stylesheet">
+    <script src="./WinJS Sample_files/highlight.pack.js.descarga"></script>
+    <script src="./WinJS Sample_files/sandbox.js.descarga"></script>
+    <style>
+        #content {
+            /* Enables scrolling and disables margin collapsing between #content and its descendants */
+            overflow: auto;
+
+            height: calc(100% - 43px); /* 43px affected by nav button's total height */
+            margin-top: 43px; /* 43px = nav button's total height */
+        }
+
+        .fullscreenOutput #content {
+            height: 100%;
+            margin-top: 0;
+        }
+
+        #code-viewer {
+            height: calc(100% - 43px); /* 43px = nav button's total height */
+            padding: 43px 10px 0 10px;
+            overflow: auto;
+            margin: 0;
+            background-color: #1E1E1E;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #content,
+        #code-viewer,
+        #hud {
+            display: none;
+        }
+
+        body.showing-output #content,
+        body.showing-code #code-viewer,
+        body.initialized #hud {
+            display: inherit;
+        }
+
+        #hud button.nav-button {
+            touch-action: manipulation; /* Disable IE's 300ms touch delay */
+            box-sizing: border-box;
+            position: absolute;
+            z-index: 800; /* High up but below WinJS's light dismissables */
+            top: 0;
+            right: 0;
+            height: 33px;
+            width: 33px;
+            min-height: 0;
+            min-width: 0;
+            padding: 0;
+            border: 1px dotted transparent;
+            margin: 5px 20px 5px 0; /* affects #content height & margin-top, #code-viewer height */
+            outline: none;
+            background-color: transparent;
+            color: black;
+            overflow: hidden;
+        }
+
+        #hud .win-hoverable button.nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        #hud button.nav-button.nav-button:active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        #hud button.nav-button.win-keyboard:focus {
+            border-color: rgb(255, 255, 255);
+        }
+
+        #hud .nav-button:after {
+            position: relative;
+            color: white;
+            font-size: 25px;
+            font-family: "Segoe UI Symbol", "Symbols";
+            content: "\E115";
+        }
+    </style>
+    <script>
+        (function () {
+
+            var _configPromise;
+            function getConfig() {
+                if (!_configPromise) {
+                    _configPromise = new WinJS.Promise(function (c) {
+                        window.addEventListener("message", function handleMessage(ev) {
+                            if (ev.source === window.opener && ev.origin === WinJSImmersiveViewer.myOrigin && ev.data) {
+                                window.removeEventListener("message", handleMessage);
+                                c(ev.data);
+                            }
+                        });
+                        window.opener.postMessage("getConfig", WinJSImmersiveViewer.myOrigin);
+                    });
+                }
+
+                return _configPromise;
+            }
+
+            var config;
+            function init() {
+                getConfig().then(function (theConfig) {
+                    config = theConfig;
+                    document.body.classList.add("initialized");
+                    if (config.fullscreenOutput) {
+                        document.body.classList.add("fullscreenOutput");
+                    }
+                    return WinJS.UI.processAll(document.getElementById("hud"));
+                }).then(function () {
+                    new WinJS.UI._WinKeyboard(document.querySelector("#hud .nav-button"));
+
+                    var scriptCommand = document.querySelector("#hud .script-command").winControl;
+                    var cssCommand = document.querySelector("#hud .css-command").winControl;
+                    var htmlCommand = document.querySelector("#hud .html-command").winControl;
+                    var outputCommand = document.querySelector("#hud .output-command").winControl;
+
+                    scriptCommand.hidden = !config.script;
+                    cssCommand.hidden = !config.css;
+                    htmlCommand.hidden = !config.html;
+
+                    showOutput();
+                    WinJS.Sandbox.runSample(config);
+                });
+            }
+            WinJS.Utilities.ready(init);
+
+            function showMenu() {
+                document.querySelector("#hud .nav-menu").winControl.show(document.querySelector("#hud .nav-button"));
+            }
+
+            function showOutput() {
+                document.body.classList.remove("showing-code");
+                document.body.classList.add("showing-output");
+            }
+
+            function showCode(value) {
+                document.body.classList.remove("showing-output");
+                document.body.classList.add("showing-code");
+                document.getElementById("code-viewer").innerHTML = hljs.highlightAuto(value).value;
+            }
+
+            WinJS.Namespace.define("WinJSImmersiveViewer", {
+                showMenu: WinJS.UI.eventHandler(showMenu),
+                showOutput: WinJS.UI.eventHandler(showOutput),
+                showScript: WinJS.UI.eventHandler(function () { showCode(config.script); }),
+                showCss: WinJS.UI.eventHandler(function () { showCode(config.css); }),
+                showHtml: WinJS.UI.eventHandler(function () { showCode(config.html); })
+            });
+
+        })();
+    </script>
+<style id="WinJSAccentsStyle">.win-link,
+.win-progress-bar,
+.win-progress-ring,
+.win-ring {
+  color: rgb(0, 120, 215);
+}
+::selection,
+.win-button.win-button-primary,
+.win-dropdown option:checked,
+select[multiple].win-dropdown option:checked {
+  background-color: rgb(0, 120, 215);
+}
+.win-textbox:focus,
+.win-textarea:focus,
+.win-textbox:focus:hover,
+.win-textarea:focus:hover {
+  border-color: rgb(0, 120, 215);
+}
+.win-textbox::-ms-clear:hover:not(:active),
+.win-textbox::-ms-reveal:hover:not(:active) {
+  color: rgb(0, 120, 215);
+}
+.win-checkbox:checked::-ms-check,
+.win-textbox::-ms-clear:active,
+.win-textbox::-ms-reveal:active {
+  background-color: rgb(0, 120, 215);
+}
+.win-progress-bar::-webkit-progress-value,
+.win-progress-ring::-webkit-progress-value,
+.win-ring::-webkit-progress-value {
+  background-color: rgb(0, 120, 215);
+}
+.win-progress-bar:not(:indeterminate)::-moz-progress-bar,
+.win-progress-ring:not(:indeterminate)::-moz-progress-bar,
+.win-ring:not(:indeterminate)::-moz-progress-bar {
+  background-color: rgb(0, 120, 215);
+}
+.win-checkbox:indeterminate::-ms-check,
+.win-checkbox:hover:indeterminate::-ms-check,
+.win-radio:checked::-ms-check {
+  border-color: rgb(0, 120, 215);
+}
+.win-slider::-ms-thumb,
+.win-slider::-ms-fill-lower {
+  background: rgb(0, 120, 215);
+}
+.win-slider::-webkit-slider-thumb {
+  background: rgb(0, 120, 215);
+}
+.win-slider::-moz-range-thumb {
+  background: rgb(0, 120, 215);
+}
+.win-listview:not(.win-selectionstylefilled) .win-selectioncheckmarkbackground,
+.win-itemcontainer:not(.win-selectionstylefilled) .win-selectioncheckmarkbackground {
+  border-color: rgb(0, 120, 215);
+  background-color: rgb(0, 120, 215);
+}
+.win-listview:not(.win-selectionstylefilled) .win-container.win-selected .win-selectionborder,
+.win-itemcontainer:not(.win-selectionstylefilled).win-container.win-selected .win-selectionborder {
+  border-color: rgb(0, 120, 215);
+}
+.win-listview.win-selectionstylefilled .win-selected .win-selectionbackground,
+.win-itemcontainer.win-selectionstylefilled.win-selected .win-selectionbackground {
+  background-color: rgb(0, 120, 215);
+}
+.win-rating .win-star.win-user.win-full,
+.win-rating .win-star.win-user.win-full.win-disabled {
+  color: rgb(0, 120, 215);
+}
+.win-toggleswitch-on .win-toggleswitch-track {
+  border-color: rgb(0, 120, 215);
+}
+.win-semanticzoom-zoomedoutview .win-hub-section-header-interactive .win-hub-section-header-content,
+.win-hub-section-header-interactive .win-hub-section-header-chevron {
+  color: rgb(0, 120, 215);
+}
+button[aria-checked=true].win-command:before,
+.win-menu-containsflyoutcommand button.win-command-flyout-activated:before {
+  background-color: rgb(0, 120, 215);
+  border-color: rgb(0, 120, 215);
+}
+.win-flyout,
+.win-settingsflyout {
+  border-color: rgb(0, 120, 215);
+}
+html.win-hoverable .win-autosuggestbox .win-autosuggestbox-suggestion-selected:hover {
+  background-color: rgba(0, 120, 215, 0.8);
+}
+html.win-hoverable .win-ui-light .win-autosuggestbox .win-autosuggestbox-suggestion-selected:hover,
+html.win-hoverable .win-ui-light.win-autosuggestbox .win-autosuggestbox-suggestion-selected:hover {
+  background-color: rgba(0, 120, 215, 0.6);
+}
+.win-autosuggestbox .win-autosuggestbox-suggestion-selected {
+  background-color: rgba(0, 120, 215, 0.6);
+}
+.win-ui-light .win-autosuggestbox .win-autosuggestbox-suggestion-selected,
+.win-ui-light.win-autosuggestbox .win-autosuggestbox-suggestion-selected {
+  background-color: rgba(0, 120, 215, 0.4);
+}
+.win-autosuggestbox .win-autosuggestbox-suggestion-selected.win-autosuggestbox-suggestion-selected:hover:active {
+  background-color: rgba(0, 120, 215, 0.9);
+}
+.win-ui-light .win-autosuggestbox .win-autosuggestbox-suggestion-selected.win-autosuggestbox-suggestion-selected:hover:active,
+.win-ui-light.win-autosuggestbox .win-autosuggestbox-suggestion-selected.win-autosuggestbox-suggestion-selected:hover:active {
+  background-color: rgba(0, 120, 215, 0.7);
+}
+html.win-hoverable .win-searchbox-button:not(.win-searchbox-button-disabled):hover {
+  color: rgb(0, 120, 215);
+}
+.win-searchbox-button.win-searchbox-button:not(.win-searchbox-button-disabled):hover:active {
+  background-color: rgb(0, 120, 215);
+}
+html.win-hoverable .win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened:hover {
+  background-color: rgba(0, 120, 215, 0.8);
+}
+html.win-hoverable .win-ui-light .win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened:hover,
+html.win-hoverable .win-ui-light.win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened:hover {
+  background-color: rgba(0, 120, 215, 0.6);
+}
+html.win-hoverable .win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened:hover.win-pressed {
+  background-color: rgba(0, 120, 215, 0.9);
+}
+html.win-hoverable .win-ui-light .win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened:hover.win-pressed,
+html.win-hoverable .win-ui-light.win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened:hover.win-pressed {
+  background-color: rgba(0, 120, 215, 0.7);
+}
+.win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened {
+  background-color: rgba(0, 120, 215, 0.6);
+}
+.win-ui-light .win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened,
+.win-ui-light.win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened {
+  background-color: rgba(0, 120, 215, 0.4);
+}
+.win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened.win-pressed {
+  background-color: rgba(0, 120, 215, 0.9);
+}
+.win-ui-light .win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened.win-pressed,
+.win-ui-light.win-navbarcommand-splitbutton.win-navbarcommand-splitbutton-opened.win-pressed {
+  background-color: rgba(0, 120, 215, 0.7);
+}
+.win-contentdialog-dialog {
+  outline-color: rgb(0, 120, 215);
+}</style><style>.renderingPageControls-controlHost {
+    width: 640px;
+    padding-top: 30px;
+}
+
+    .renderingPageControls-controlHost h2 {
+        font-size: medium;
+    }
+
+#statusMessage
+{
+    position: fixed;
+    width: 100%;
+    background-color: rgb(29, 29, 29);
+    margin-bottom:5px;
+    color: green;
+}
+</style><link href="./WinJS Sample_files/samplePageControl.css" rel="stylesheet"></head>
+<body class="win-type-body initialized showing-output">
+    <pre id="code-viewer"></pre>
+    <div id="content"><div data-win-control="WinJS.Site.PageControlNavigator" data-win-options="{}"><div dir="ltr" class="win-disposable pagecontrol" style="position: absolute; width: 100%; height: 100%; opacity: 1;"><div><div id="statusMessage">Render control button was clicked</div>
+<div class="renderingPageControls-controlHost">
+    <h2 class="win-h2">This control is rendered via a call to <span class="code">WinJS.UI.Pages.render</span>, passing the URI of the HTML to load.</h2>
+    <div class="renderingPageControls-renderedControl win-disposable pagecontrol">
+    <div class="samplePageControl">
+        <p class="samplePageControl-text"><span data-win-bind="textContent: controlText" id="_win_bind858">This control created by calling WinJS.UI.Pages.render</span>
+        <button class="win-button samplePageControl-button">Click me</button></p>
+        <p>Page controls can also contain WinJS controls. They are activated automatically.</p>
+        <div class="samplePageControl-toggle win-toggleswitch win-disposable win-toggleswitch-off win-toggleswitch-enabled" data-win-control="WinJS.UI.ToggleSwitch" aria-labelledby="element__4" role="checkbox" aria-checked="false" aria-disabled="false" tabindex="0"><div class="win-toggleswitch-header" aria-hidden="true" id="element__4"></div>
+<div class="win-toggleswitch-clickregion">
+   <div class="win-toggleswitch-track">
+       <div class="win-toggleswitch-thumb"></div>
+   </div>
+   <div class="win-toggleswitch-values" aria-hidden="true">
+      <div class="win-toggleswitch-value win-toggleswitch-value-on">On</div>
+      <div class="win-toggleswitch-value win-toggleswitch-value-off">Off</div>
+   </div>
+</div>
+<div class="win-toggleswitch-description"></div></div>
+    </div>
+
+
+</div>
+</div>
+<div class="renderingPageControls-controlHost">
+    <h2 class="win-h2">This control is rendered declaratively, as if it were a control. Which it is!</h2>
+    <div class="renderingPageControls-declarativeControl win-disposable pagecontrol" data-win-control="Controls_PageControls.SamplePageControl" data-win-options="{controlText: &#39;This was created declaratively&#39;, message: &#39;Declarative control&#39; }">
+    <div class="samplePageControl">
+        <p class="samplePageControl-text"><span data-win-bind="textContent: controlText" id="_win_bind856">This was created declaratively</span>
+        <button class="win-button samplePageControl-button">Click me</button></p>
+        <p>Page controls can also contain WinJS controls. They are activated automatically.</p>
+        <div class="samplePageControl-toggle win-toggleswitch win-disposable win-toggleswitch-off win-toggleswitch-enabled" data-win-control="WinJS.UI.ToggleSwitch" aria-labelledby="element__2" role="checkbox" aria-checked="false" aria-disabled="false" tabindex="0"><div class="win-toggleswitch-header" aria-hidden="true" id="element__2"></div>
+<div class="win-toggleswitch-clickregion">
+   <div class="win-toggleswitch-track">
+       <div class="win-toggleswitch-thumb"></div>
+   </div>
+   <div class="win-toggleswitch-values" aria-hidden="true">
+      <div class="win-toggleswitch-value win-toggleswitch-value-on">On</div>
+      <div class="win-toggleswitch-value win-toggleswitch-value-off">Off</div>
+   </div>
+</div>
+<div class="win-toggleswitch-description"></div></div>
+    </div>
+
+
+</div>
+</div>
+<div class="renderingPageControls-controlHost">
+    <h2 class="win-h2">This control is created programmatically as a control.</h2>
+    <div class="renderingPageControls-createdProgrammatically win-disposable pagecontrol">
+    <div class="samplePageControl">
+        <p class="samplePageControl-text"><span data-win-bind="textContent: controlText" id="_win_bind859">This control created by calling the constructor directly</span>
+        <button class="win-button samplePageControl-button">Click me</button></p>
+        <p>Page controls can also contain WinJS controls. They are activated automatically.</p>
+        <div class="samplePageControl-toggle win-toggleswitch win-disposable win-toggleswitch-off win-toggleswitch-enabled" data-win-control="WinJS.UI.ToggleSwitch" aria-labelledby="element__5" role="checkbox" aria-checked="false" aria-disabled="false" tabindex="0"><div class="win-toggleswitch-header" aria-hidden="true" id="element__5"></div>
+<div class="win-toggleswitch-clickregion">
+   <div class="win-toggleswitch-track">
+       <div class="win-toggleswitch-thumb"></div>
+   </div>
+   <div class="win-toggleswitch-values" aria-hidden="true">
+      <div class="win-toggleswitch-value win-toggleswitch-value-on">On</div>
+      <div class="win-toggleswitch-value win-toggleswitch-value-off">Off</div>
+   </div>
+</div>
+<div class="win-toggleswitch-description"></div></div>
+    </div>
+
+
+</div>
+</div>
+<div class="renderingPageControls-controlHost">
+    <h2 class="win-h2">This control was rendered via the HTML control, which is a declarative way to call <span class="code">WinJS.UI.Pages.render</span>.</h2>
+    <div class="renderingPageControls-htmlControl win-disposable pagecontrol" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: &#39;/pages/pageControl/samplePageControl.html&#39;,
+        controlText: &#39;This was rendered via the HtmlControl&#39;,
+        message: &#39;HTML Control loaded control&#39; }">
+    <div class="samplePageControl">
+        <p class="samplePageControl-text"><span data-win-bind="textContent: controlText" id="_win_bind857">This was rendered via the HtmlControl</span>
+        <button class="win-button samplePageControl-button">Click me</button></p>
+        <p>Page controls can also contain WinJS controls. They are activated automatically.</p>
+        <div class="samplePageControl-toggle win-toggleswitch win-disposable win-toggleswitch-off win-toggleswitch-enabled" data-win-control="WinJS.UI.ToggleSwitch" aria-labelledby="element__3" role="checkbox" aria-checked="false" aria-disabled="false" tabindex="0"><div class="win-toggleswitch-header" aria-hidden="true" id="element__3"></div>
+<div class="win-toggleswitch-clickregion">
+   <div class="win-toggleswitch-track">
+       <div class="win-toggleswitch-thumb"></div>
+   </div>
+   <div class="win-toggleswitch-values" aria-hidden="true">
+      <div class="win-toggleswitch-value win-toggleswitch-value-on">On</div>
+      <div class="win-toggleswitch-value win-toggleswitch-value-off">Off</div>
+   </div>
+</div>
+<div class="win-toggleswitch-description"></div></div>
+    </div>
+
+
+</div>
+</div>
+</div></div></div></div>
+    <div id="hud">
+        <button class="nav-button" onclick="WinJSImmersiveViewer.showMenu();"></button>
+        <div class="nav-menu win-overlay win-disposable win-flyout win-menu" data-win-control="WinJS.UI.Menu" tabindex="-1" unselectable="on" role="menu" aria-label="Menu" style="visibility: hidden; opacity: 0; top: 38px; bottom: auto; left: auto; right: 0px; display: none;" aria-hidden="true"><button class="script-command win-disposable win-command win-command-button" data-win-control="WinJS.UI.MenuCommand" data-win-options="{
+                    label:&#39;JS&#39;,
+                    type:&#39;button&#39;,
+                    onclick: WinJSImmersiveViewer.showScript
+                }" type="button" aria-label="JS" role="menuitem" style="display: block;"><div class="win-menucommand-liner"><span class="win-toggleicon" aria-hidden="true"></span><span class="win-label" aria-hidden="true">JS</span><span class="win-flyouticon" aria-hidden="true"></span></div></button><button class="css-command win-disposable win-command win-command-button" data-win-control="WinJS.UI.MenuCommand" data-win-options="{
+                    label:&#39;CSS&#39;,
+                    type:&#39;button&#39;,
+                    onclick: WinJSImmersiveViewer.showCss
+                }" type="button" aria-label="CSS" role="menuitem" style="display: block;"><div class="win-menucommand-liner"><span class="win-toggleicon" aria-hidden="true"></span><span class="win-label" aria-hidden="true">CSS</span><span class="win-flyouticon" aria-hidden="true"></span></div></button><button class="html-command win-disposable win-command win-command-button" data-win-control="WinJS.UI.MenuCommand" data-win-options="{
+                    label:&#39;HTML&#39;,
+                    type:&#39;button&#39;,
+                    onclick: WinJSImmersiveViewer.showHtml
+                }" type="button" aria-label="HTML" role="menuitem" style="display: block;"><div class="win-menucommand-liner"><span class="win-toggleicon" aria-hidden="true"></span><span class="win-label" aria-hidden="true">HTML</span><span class="win-flyouticon" aria-hidden="true"></span></div></button><button class="output-command win-disposable win-command win-command-button" data-win-control="WinJS.UI.MenuCommand" data-win-options="{
+                    label:&#39;Output&#39;,
+                    type:&#39;button&#39;,
+                    onclick: WinJSImmersiveViewer.showOutput
+                }" type="button" aria-label="Output" role="menuitem"><div class="win-menucommand-liner"><span class="win-toggleicon" aria-hidden="true"></span><span class="win-label" aria-hidden="true">Output</span><span class="win-flyouticon" aria-hidden="true"></span></div></button></div>
+    </div>
+
+<div class="win-visualviewport-space"></div></body></html>

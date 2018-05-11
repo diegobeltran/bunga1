@@ -1,0 +1,126 @@
+
+
+
+/* Add your CSS here */
+.content, #app {
+    height: calc(100% - 72px);
+}
+    #app .win-splitviewpanetoggle {
+        
+    }
+
+    /* SplitView pane content style*/
+    #app .header {
+        white-space: nowrap;
+    }
+
+    #app .title {
+        font-size: 25px;
+        left: 50px;
+        margin-top: 6px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+    #app .nav-commands {
+        margin-top: 20px;
+    }
+
+.win-navbarcommand-button {
+    background-color: transparent;
+}
+
+#app .win-splitview-pane-hidden .win-navbarcommand-button {
+    width: 0px;
+}
+
+#app .win-splitview-pane-hidden .win-navbarcommand-label {
+    /* Workaround: Make sure pane doesn't scroll if ContentDialog restores focus to
+       NavBarCommand's label
+    */
+    visibility: hidden;
+}
+
+#app .win-splitview-pane-closed
+{
+	width: 1px ;
+}
+
+
+/*SplitView pane style for different screen sizes*/
+#app.large .splitView {
+    width: 100%;
+}
+
+#app.large .win-splitview-content .win-splitviewpanetoggle {
+    display: none;
+}
+
+#app.medium .splitView {
+    width: 80%
+}
+
+#app.medium .win-splitview-content .win-splitviewpanetoggle {
+    display: none;
+}
+
+#app.small .splitView {
+    width: 60%;
+}
+
+/*SplitView content style*/
+#app .win-splitview-content {
+    background-color: rgb(112,112,112);
+}
+
+#app .contenttext {
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+/* Add your CSS here */
+body {
+	background-color: rgb(112,112,112);
+}
+
+#content {
+	text-align: center;
+    overflow: hidden;
+}
+
+.image {
+	position: relative;
+	margin: auto;
+	margin-top: 50px;
+	margin-bottom:50px;
+}
+
+img { 
+    max-width: 100%; 
+
+}
+
+
+
+
+
+
+
+
+
+
+body {
+    background-color: rgb(112,112,112);
+}
+
+#content {
+    text-align: center;
+}
+
+.imperativeToolBar {
+    margin-top: 50px;
+}
+
+.status {
+	margin-top: 12px;
+}

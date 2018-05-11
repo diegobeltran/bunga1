@@ -1,0 +1,5 @@
+[ZoneTransfer]
+HostIpAddress=52.216.65.208
+ZoneId=3
+ReferrerUrl=http://winjs.azurewebsites.net/
+HostUrl=https://github-production-release-asset-2e65be.s3.amazonaws.com/18102026/89ee5cb4-271d-11e5-8004-95ad50516a48?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20180122%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180122T071003Z&X-Amz-Expires=300&X-Amz-Signature=dec62c1881eea9427f02142c34db6db13746c6f14091f11855ae3fcc41b3b5e3&X-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3Dwinjs.zip&response-content-type=application%2Foctet-stream

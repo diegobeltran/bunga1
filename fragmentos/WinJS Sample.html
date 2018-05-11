@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://winjs.azurewebsites.net/immersiveViewer.html -->
+<html class="win-hoverable"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>WinJS Sample</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script>
+        (function () {
+
+            if (!window.opener) {
+                // This page only works when it can get configuration data from the window that
+                // opened it. If no window opened it, this page is useless so redirect to the
+                // main page.
+                //window.location = "http://try.buildwinjs.com/";
+            }
+
+            var myOrigin = location.protocol + "//" + location.hostname +
+                (location.port ? ":" + location.port : "");
+
+            // Let the opener know we're loading as soon as possible before any timeouts
+            // it has set up expire. The opener uses the "loading" and "unload" messages
+            // in coordination with a timeout to distinguish between this window closing
+            // and refreshing.
+            
+			//window.opener.postMessage("loading", myOrigin);
+            
+			window.onunload = function () {
+                window.opener.postMessage("unload", myOrigin);
+            };
+
+            // Can't use WinJS.Namespace.define because we haven't loaded WinJS yet
+            window.WinJSImmersiveViewer = window.WinJSImmersiveViewer || {};
+            WinJSImmersiveViewer.myOrigin = myOrigin;
+
+        })();
+    </script>
+
+    <link href="frag/ui-dark.css" rel="stylesheet">
+   
+    <script src="frag/base.min.js"></script>
+    <script src="frag/ui.min.js"></script><style></style>    
+  
+   
+
+
+</head>
+<body class="win-type-body initialized showing-output">
+    
+    <div id="content"><div class="box">
+    <button class="win-button action" id="fragmentScriptCSSButton">Load the fragment</button><br />
+    <div id="fragmentScriptCSSDiv"></div>
+    <br />
+    <div id="status"></div>
+</div>
+    <script >
+var fragmentScriptCSSDiv = document.querySelector("#fragmentScriptCSSDiv");
+
+function defaultScript() {
+   
+	resetOutput();
+	
+    // Read fragment from the HTML file and load it into the div.  This
+    // fragment also loads linked CSS and JavaScript specified in the fragment
+    WinJS.UI.Fragments.renderCopy("pagesfrag/fragmentCSS.html", fragmentScriptCSSDiv)
+        .done(
+            function (fragment) {
+			    
+                // After the fragment is loaded into the target element,
+                // CSS and JavaScript referenced in the fragment are loaded.  The
+                // fragment loads script that defines an initialization function,
+                // so we can now call it to initialize the fragment's contents.
+                FragmentScriptCSS.fragmentLoad(fragment);
+
+                log("successfully loaded fragment", "sample", "status");
+            },
+            function (error) {
+                log("error loading fragment: " + error, "sample", "error");
+            }
+        );
+}
+
+function resetOutput() {
+    fragmentScriptCSSDiv.innerHTML = "";
+}
+
+function log(msg) {
+    document.getElementById("status").innerHTML += msg + "<br/>";
+}
+
+WinJS.Utilities.query("#fragmentScriptCSSButton", document).listen("click", defaultScript);
+
+</script>
+</div>
+</div>
+   
+
+</body></html>

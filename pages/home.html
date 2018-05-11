@@ -1,0 +1,476 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>bugaTOOn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <!--<link rel="stylesheet" href="/cosmo/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/bootstrap-theme.css" type="text/css">-->
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+    <!-- WinJS references -->
+    <link href="../css/ui-dark.css?v1.0.143" rel="stylesheet" />
+	
+    <script src="../js/base.min.js"></script>	
+    <script src="../js/ui.min.js?v1.0.143" id='1'></script>	
+	
+    <link href="../css/commonstyles.css" rel="stylesheet" />   
+    <link href="../css/semanticzoom.css" rel="stylesheet" />
+    <link href="../css/verticallayout.css" rel="stylesheet" /> 
+    <link href="../css/fontcss.css" rel="stylesheet" type="text/css">    
+    <link rel="stylesheet" href="../css/style.css" type="text/css">    
+	 <link href="../css/homepackage.css" rel="stylesheet" />     
+    <script src="../js/verticallayout.js" type="text/javascript" id='1'></script>     
+    <script src="../js/jquery.min.js" id='1'></script>
+    <script src="../js/store.js" id='1'></script>
+	<script src="../js/notifications.js?v1" id='1'></script>   
+    <script src="../js/bugatools.js?v1" id='1'></script>    
+	<script src="../js/configform.js" id='1'></script>    
+    <script type="text/javascript" src="../js/bootstrap.min.js" id='1'></script>
+
+        <!-- Handlebars 
+        <script type="text/javascript" src="/handlebars.js" id='1'></script>-->
+
+        <!-- Custom Files -->
+     
+    <script id="new_">
+      
+	  var yourCodeToBeCalled = function(){
+		
+		
+		}  
+		  
+		 //repli('../css','href','link',yourCodeToBeCalled);
+		 //alert('dmmmmd');
+		 //repli('../js','src','script',yourCodeToBeCalled);
+	     
+		 //replacejscssfile("/base.min.js", "../js/base.min.js", "js")
+		 //Notifications.itemInvoked
+		 //listView.addEventListener("itemInvoked", Notifications.itemDragEnter, false);
+		
+</script>		 
+<script>		
+
+          function loadsection1(noti){
+		  
+		  loadsection(noti);
+		  
+		  }
+			var sectionname_;
+		  function loadsection11(){
+		  
+		    
+		  
+		     var sectionname_tmp=  store.get('_currentTemplate');
+			 
+			 if(sectionname_tmp != undefined && (sectionname_tmp !=sectionname_) )
+           {
+			  alert('loadsection11');
+			 loadsection(sectionname_);
+			 sectionname_=sectionname_tmp;
+			}
+		  
+		  }
+		
+          function loadsection(noti)
+          {
+		  
+			  //store.set('_inisection',0);
+              store.set('_currentSectionConfig','');        
+              store.set('_currentWidgetConfig','');
+               store.set('_currentSectionIni','');
+              var sectionname=  store.get('_currentTemplate');
+             // alert(sectionname);
+              if(sectionname==undefined){
+                  sectionname='defaultsection';
+              }
+              else{
+                  
+               }
+			   
+			   //alert(_user);
+			  //sectionname=_user.toString() + '-' + sectionname;
+			  //alert('config/section/' + sectionname + '.js?v='+ ramdonversion());
+			  
+              dynamicInsert('config/section/' + sectionname + '.js?v='+ ramdonversion());
+              
+              CreateReaderControl('section.htm','?_target=section','modal_dialog');
+            
+             //setTimeout(function(){ loadframex(); }, 1200);
+             return; 
+          }
+          
+         function loadframex(){
+            var iframe = $('#ifrmID')[0];
+            var iframewindow = iframe.contentWindow ? iframe.contentWindow : iframe.contentDocument.defaultView;
+            iframewindow.creategrid();
+         } 
+
+		 
+		 ///////////////////////carga el widget
+
+       var currentwidget;
+          
+    function createwidget()
+          {
+              return;
+       try{
+	       
+             var currentwidgettmp=store.get('_currentWidget');
+           
+           if(currentwidgettmp != undefined && (currentwidgettmp !=currentwidget) )
+           {
+		   
+		        //alert(currentwidgettmp);
+              var sectionname=  store.get('_currentTemplate');
+               
+               var widgetfile='config/widget/'+ sectionname + '-' + currentwidgettmp + '.js?v='+ramdonversion();
+               //alert(widgetfile);
+		       
+			   
+			   dynamicInsert(widgetfile);
+               
+			   CreateReaderControl('widget.htm','?_target=widget','section3');
+			   
+               currentwidget=currentwidgettmp;
+               //CreateReaderControlCreateWidget();
+           }
+           
+           }
+           catch(e){
+               
+               alert('home createwidget ' + e.message);
+               
+           }
+              
+          }
+          
+	
+	function loadWidgetConfig(data) {
+      //alert("Symbol: " + data.symbol + ", Price: " + data.price);
+        //alert(data);
+        
+       //CreateReaderControlWidget(data);   
+       store.set('_currentwidgetconfigkrip',data);
+      }
+      /////////////////////////////////////////
+		 
+		 
+var timerId // current timer if started
+ 
+function clockStart() {
+  if (timerId) return;
+  timerId = setInterval(loadsection11, 800);
+  
+}
+
+function clockStop() {
+  clearInterval(timerId);
+  timerId = null;
+}
+
+  store.clear();
+  //clockStart(); 
+                
+          
+      </script>
+<script type="text/javascript">
+     
+      //esto viene de los archivos de configurcion
+      function loadConfig(data) {
+      //alert("Symbol: " + data.symbol + ", Price: " + data.price);
+      // _sectionConfig=data;
+        //alert('1');
+        var sectionname=  store.get('_currentTemplate');
+		
+		//sectionname=_user.toString() + '-' + sectionname;
+		
+        dynamicInsert('config/layout/' + sectionname + '.js?v='+ ramdonversion());
+        
+		//CreateReaderControlSection(data); 
+
+		store.set('_currentsectionconfigkrip',data);
+        
+      }
+      
+      
+      
+      
+      function loadLayout(data) {
+      
+       //alert(data);
+       store.set('_currentSectionIni',data);
+       
+      }
+      
+      //var url = 'ticker.js'; // URL of the external script
+      // this shows dynamic script insertion
+     
+      	  
+       
+</script>
+<style>
+  .margint{
+    margin-top:0px;
+  }
+  .win-hub-section-header-content{
+   
+   text-align:center;
+  }
+</style>
+</head>
+<body >
+    
+      <img src="../images/templates_1/filebackground.jpg" class="background bgwidth" alt="">
+	  
+       <div id="split1" class="splitView" data-win-control="WinJS.UI.SplitView" data-win-options="{
+            openedDisplayMode: 'overlay',
+            closedDisplayMode: 'none'
+         }">
+        <!-- Pane area -->
+        <div>
+            <div class="headerxxx">
+                <button
+                    class="win-splitviewpanetoggle"
+                    data-win-control="WinJS.UI.SplitViewPaneToggle"
+                    data-win-options="{ splitView: select('#split1'),icon: 'settings' }"
+                ></button>
+            </div>
+                             <!-- home My packages(lista, download y link) , news, contactos, alertas-->
+                             <!-- tools tablero, creador de audio, creador de scripts, creador de imagenes, 
+                             visor html, creador widgests
+                             create package templates(fijos, dinamicos,modificable ) -->
+            <div class="nav-commands">
+                <div data-win-control="WinJS.UI.NavBarCommand" id="navbar1" data-win-options="{ label: 'Home', icon: 'home'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" id="navbar2" data-win-options="{ label: 'Find', icon: 'search'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" id="navbar3" data-win-options="{ label: 'Create Package', icon: 'package'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" id="navbar4" data-win-options="{ label: 'Media', icon: 'photo'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" id="navbar5" data-win-options="{ label: 'Settings', icon: 'settings'}"></div>
+            </div>
+            <div id="confirmFlyout"  aria-label="{Confirm purchase flyout}"   
+    style="display:block;width:95%;position:absolute;z-index:100; opacity: 0.85;
+    filter: alpha(opacity=85);  border-style: solid;
+    border-color: #0000ff #0000ff;height:70%">
+    <div id="settingstittle" style="width:300px;margin-left:20%;display:none">Settings</div>
+    <!--tamaño,background
+	<ul  class="nav nav-pills">
+			<li class="active">
+        <a  href="#1a" data-toggle="tab" >section</a>
+        
+        
+			</li>
+			<li>
+             <a href="#2a" data-toggle="tab"   >widget</a>
+			</li>
+            
+			 	
+		</ul>-->
+        <!--<a href=""  onclick='' style="float:right;margin-top:-2%; margin-right:5%">X</a>-->
+            
+        <div class="tab-content clearfix" style="height:100%;text-aling:center;top:0px">
+			    <div class="tab-pane" id="1a" style="height:100%;top:0px;margin-top:0%">
+                    jjjjjjjjj
+                </div>
+				<div class="tab-pane" id="2a" style="height:100%">
+                <div class="container">
+                <div class="row">
+                <div class="col-md-12">
+                <div id="form" class="">jjjjjjj
+                </div>
+                </div>
+                </div>
+                </div>
+	            </div>
+           </div>
+           </div>    
+        </div>
+
+        <!-- Content area 
+       
+        <div class="contenttext"><h2 class="win-h2">SplitView Content area</h2> </div>-->
+       </div> 
+       
+       <!--split 2 -->
+        <div id="split2" class="splitView" style="float:right" data-win-control="WinJS.UI.SplitView" data-win-options="{
+            openedDisplayMode: 'overlay',
+            closedDisplayMode: 'none',
+            panePlacement:'right'
+         }">
+        <!-- Pane area -->
+        <div>
+            <div class="headerxxx">
+                <button
+                    class="win-splitviewpanetoggle" style="float:right"
+                    data-win-control="WinJS.UI.SplitViewPaneToggle"
+                    data-win-options="{ splitView: select('#split2') }"
+                ></button>
+            </div>
+                             <!-- home My packages(lista, download y link) , news, contactos, alertas-->
+                             <!-- tools tablero, creador de audio, creador de scripts, creador de imagenes, 
+                             visor html, creador widgests
+                             create package templates(fijos, dinamicos,modificable ) -->
+            <div class="nav-commands">
+                <div data-win-control="WinJS.UI.NavBarCommand" id="navbar1" data-win-options="{ label: 'My Toons', icon: 'home'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" id="navbar2" data-win-options="{ label: 'Find', icon: 'search'}"></div>
+                
+            </div>
+        </div>
+
+        <!-- Content area 
+       
+        <div class="contenttext"><h2 class="win-h2">SplitView Content area</h2> </div>-->
+       </div> 
+       
+       
+    <!-- The content that will be loaded and displayed. -->
+    <div class="fragment verticallayout fullScreen" >
+
+        <div id="appHeader"  style="width:100%" >
+         <div style="width:100%">
+            <button style="float:left;top:0px"
+            class="win-splitviewpanetoggle"
+            data-win-control="WinJS.UI.SplitViewPaneToggle"
+            data-win-options="{ splitView: select('#split1') }">
+            </button>
+            <div style="top:-10px;float:left">
+                <div id="section1minus" style="display: none">
+                bugaTOOn
+                </div>
+             </div>
+            <button style="float:right;margin-right:20px"
+            class="win-splitviewpanetoggle"
+            data-win-control="WinJS.UI.SplitViewPaneToggle"
+            data-win-options="{ splitView: select('#split2') }">
+            </button>
+            
+            </div>    
+                    <!--  <button data-win-control="WinJS.UI.BackButton"></button>-->
+        </div>
+
+        <!-- Binding Template for Semantic View tile blue w2 h1 icon-featurecw-->
+        <div id="zoomedOutListViewItemTemplate"  data-win-control="WinJS.Binding.Template">
+           <span data-win-bind="className: color" 
+              style="width:100%">
+             <i data-win-bind="className: picture" ></i>
+            <p class="titlex" data-win-bind="textContent: header"></p>
+            </span>
+        </div>
+        
+         <!--  <div id="zoomedOutListViewItemTemplate1" data-win-control="WinJS.Binding.Template" 
+           class="tile blue w2 h1 icon-featurecw title-fadeout isotope-item" 
+                style="position: absolute; left: 0px; top: 0px; transform: translate3d(544px, 24px, 0px);">
+                    <a class="link" data-scroll="scrollto" >
+                        <i class="fa fa-picture-o"></i>
+                        <p class="title" data-win-bind="textContent: header"></p>
+                    </a>
+         </div>-->
+       
+        <!-- Template for ListView Section3 -->
+        <div id="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template">
+            <div class="smallListIconTextItem">
+                <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: picture" />
+                <div class="smallListIconTextItem-Detail">
+                    <h4 data-win-bind="innerText: title"></h4>
+                    <h6 data-win-bind="innerText: text"></h6>
+                </div>
+            </div>
+        </div>
+
+          <!-- ZoomedIn View of the Hub -->
+        <div id="semanticZoomDiv"  class="SeZo" data-win-control="WinJS.UI.SemanticZoom" data-win-options="{ zoomedOut : true}">
+          
+            <div data-win-control="WinJS.UI.Hub"  >
+                 
+                <div class="hero sectionlist margint" data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'templates',isHeaderStatic: true}">
+                  <iframe src="Templates.htm" width="99%" height="95%">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>
+                   <!-- <div id="section1" style="width:100%;height:100%" >
+                           
+                   </div>-->
+				   
+                </div>
+                <div class="hero sectionbug" style="overflow:hidden;"  data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'Composition',isHeaderStatic: true}">
+                   
+                    <!--<iframe src="pages/section.htm" width="100%" height="95%" scrolling="yes" id="iframesection">
+                        <p>Your browser does not support iframes.</iframe></p>-->
+                        
+                        <div id="modal_dialog" style="width:100%;height:100%;overflow-y: scroll;" >
+                            
+                            <div class="emptysection"></div>
+                        </div>
+                        
+                        
+                    
+                </div>
+               
+
+                <div class="hero sectionbug" data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'Document',isHeaderStatic: true}">
+                  <!-- <iframe src="widget.htm" width="100%" height="100%">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>-->
+                    <div id="section3" style="width:100%;height:100%" >
+                          <div class="emptysection"> </div>
+                    </div>
+                </div>
+				
+				<div class="hero sectionbug" data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'Help',isHeaderStatic: true}">
+                  <!-- <iframe src="widget.htm" width="100%" height="100%">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>-->
+                    <div id="section4" style="width:100%;height:100%" >
+                          <div class="emptysection"> </div>
+                    </div>
+                </div>
+				
+				<div class="hero sectionbug" data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'Contact',isHeaderStatic: true}">
+                  <!-- <iframe src="widget.htm" width="100%" height="100%">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>-->
+                    <div id="section5" style="width:100%;height:100%" >
+                          <div class="emptysection"> </div>
+                    </div>
+                </div>
+                
+               <!-- <div class="hero" data-win-control="WinJS.UI.HubSection"  data-win-options="{header: 'tools',isHeaderStatic: true}">
+                   
+                    <video  class="promoVideo" src="../images/cycle.mp4" controls></video>
+                </div>-->
+                
+                
+            </div>
+             
+            <!-- ZoomedOut View of the Hub -->
+            <div class="ZoomedOutListView" data-win-control="WinJS.UI.ListView" data-win-options="{
+                itemTemplate: select('#zoomedOutListViewItemTemplate'),
+                itemDataSource: myData.groupedItemsList.dataSource,
+                layout:{type: WinJS.UI.GridLayout,orientation:'horizontal' },
+                swipeBehavior: WinJS.UI.SwipeBehavior.none,
+                selectionMode: WinJS.UI.SelectionMode.none
+            }">
+            </div>
+
+            
+        </div>
+        
+        <!--<div class="tile blue w2 h1 icon-featurecw title-fadeout isotope-item" 
+                style="position: absolute; left: 0px; top: 0px; transform: translate3d(544px, 24px, 0px);">
+                    <a class="link" data-scroll="scrollto" href="#portfolio">
+                        <i class="fa fa-picture-o"></i>
+                        <p class="title">Portfolio</p>
+                    </a>
+           </div>-->
+        
+
+    </div>
+	
+	
+
+	
+</body>
+	
+</html>

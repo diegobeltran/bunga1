@@ -1,0 +1,184 @@
+{
+    "title": "Modules",
+    "type": "object",
+    "properties": {
+        "ModuleName": {
+            "title": "Module Name",
+            "type": "string",
+            "description": "Module Name",
+            "minLength": 2,
+            "default": "background"
+        },
+      "DocumentNumber": {
+          "title": "Module Number",
+          "type": "integer",
+          "description": "",
+          "default": ""
+      },
+      "WidgetNumber": {
+          "type": "string",
+          "description": "All for all widgets, or \",\" separete for example 1,3,5",
+          "default": "ALL"
+      },
+      "Files": {
+          "type": "array",
+          "format": "table",
+          "title": "Files",
+          "uniqueItems": true,
+          "items": {
+              "type": "object",
+              "properties": {
+                  "type": {
+                      "type": "string",
+                      "enum": [
+                        "CSS",
+                        "JavaScript",
+                        "other"
+                      ],
+                      "default": "CSS"
+                  },
+                "pathfile": {
+                    "type": "string"
+                }
+              }
+          }
+      },
+      "Actions": {
+          "title": "Actions",
+          "options": {
+    "keep_oneof_values": false
+     },
+
+                              "oneOf": [
+                            
+                                {
+                                    "title": "only Action",
+                                    "$ref": "#/definitions/onlyAction",
+                                    "description": "Execute only the action"
+                                },
+                                {
+                                    "title": "Action and Time",
+                                    "$ref": "#/definitions/time",
+                                    "description": "time in (milliseconds)"
+                                }
+                              ]
+      },
+      "Code_text": {
+          "type": "string",
+          "description": "Code",
+          "format": "html"
+      }
+    },
+  "defaultProperties": [
+    "ModuleName",
+    "Actions",
+	  "Files",
+    "Code_text",
+    "Document Number",
+    "Widget Number"
+  ],
+  "definitions": {
+    "time": {
+      "type": "array",
+      "format": "table",
+      "title": "Time",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "typeAction": {
+            "title": "Action",
+            "description": "Action",
+            "type": "string",
+            "enumSource": [{
+                     "source": [
+                    {
+                      "value": "clickTime",
+                      "title": "click and wait to execute"
+                    }
+
+                    ],
+                      "title": "{{item.title}}",
+                      "value": "{{item.value}}"
+                    }]
+          },
+          "timetowait": {
+            "type": "integer",
+            "description": "Time to wait",
+            "title": "Time to wait"
+          },
+          "mode": {
+            "type": "integer",
+            "description": "Mode when is execute",
+            "title": "Mode"
+          }
+        }
+      }
+    },
+    "onlyAction": {
+          "type": "array",
+          "format": "table",
+          "title": "only Action",
+          "uniqueItems": true,
+          "items": {
+              "type": "object",
+              "properties": {
+                  "typeAction": {
+                      "title":"Action",
+                      "description":"Action",
+                      "type": "string",
+                     "enumSource": [{
+                     "source": [
+                    {
+                      "value": "click",
+                      "title": "click"
+                    },
+                      {
+                        "value": "click, disabled",
+                        "title": "click and disabled"
+                      },
+                      {
+                        "value": "dblclick",
+                        "title": "doble click"
+                      },
+                      {
+                        "value": "mouseover",
+                        "title": "over element"
+                      },
+                      {
+                        "value": "mousedown",
+                        "title": "press click (mouse down)"
+                      }
+                      ,
+                      {
+                        "value": "rollover",
+                        "title": "change when over "
+                      }
+                      ,
+                       {
+                        "value": "rollover,rollout",
+                        "title": "change when over and return"
+                      }
+
+                    ],
+                      "title": "{{item.title}}",
+                      "value": "{{item.value}}"
+                    }]
+                  } ,
+                "mode": {
+                    "type": "integer",
+                    "description":"Mode when is execute",
+                    "title":"Mode"
+                }
+              }
+          }
+      },
+   
+    
+	
+    "enableonload": {
+        "type": "boolean",
+        "default": false
+    }
+  }
+}

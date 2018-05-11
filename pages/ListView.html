@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://winjs.azurewebsites.net/pages/listview/options/default.html -->
+<html class="win-hoverable" hc="a0" hcx="0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>ListView Test</title>
+
+    <!-- WinJS references -->
+    <link href="./css/ui-dark.css" rel="stylesheet">
+    <script src="./winjs/base.min.js"></script>
+    <script src="./winjs/ui.min.js"></script><style></style>
+
+    <!-- Other Library references-->
+    <script src="./js/highlight.pack.js"></script>
+
+    <!-- ListView-Test references -->
+    <link href="./css/default.css" rel="stylesheet">
+    <link href="./css/listView.css" rel="stylesheet">
+    <link href="./css/controlBox.css" rel="stylesheet">
+    <link href="./css/infoSection.css" rel="stylesheet">
+    <link href="./css/customHighlightStyle.css" rel="stylesheet">
+    <script src="./js/default.js"></script>
+    <script src="./js/listViewConfigChanges.js"></script>
+    <script src="./js/listViewData.js"></script>
+    <script src="./js/initialize.js"></script>
+    <script src="./js/listViewTemplates.js"></script>
+    <script src="./js/listViewLayoutChanges.js"></script>
+    <script src="./js/listViewMethods.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script src="./js/documentation.js"></script>
+    <script src="./js/controlBox.js"></script>
+    <script src="./js/controlBoxTemplate.js"></script>
+    <script src="./js/controlBoxData.js"></script>
+    <script src="./js/garbageCan.js"></script>
+    <script src="./js/simpleFlipper.js"></script>
+    <script src="./js/gitHubIssue.js"></script>
+</head>
+<body class="win-type-body">
+    
+    <!-- Simple inline template for ListView-->
+    <div class="listIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+        
+        <div class="listIconTextItem-Detail">
+            <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+            <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+        </div>
+    </div>
+
+    <button onclick="add();"></button>
+	
+    <div class="controlBoxArea" style='display:none'>
+    </div>
+	<div style='float:left'>
+    <button class="win-button listViewDocumentationToggle" style="display: block; opacity: 1;">Documentation</button>    
+    </div>
+	<div class="listViewSection" style="display: block; opacity: 1;float:left;clear:both;margin-top:0px">
+        <div class="win-selectionstylefilled listView win-disposable win-listview win-element-resize"  data-win-control="WinJS.UI.ListView" data-win-options="{
+                 itemDataSource: ListView.smallData.dataSource,
+                 layout: { type: WinJS.UI.ListLayout },
+				  header: select('.header'),
+                  footer: select('.footer')
+             }"> </div>
+    </div>
+    
+	<div class="headerFooterPlaceholder">
+        <div class="header">
+            <h2 class="win-h2"></h2>
+             
+        </div>
+
+        <div class="footer">
+           
+        </div>
+    </div>
+	
+    <div class="interactiveInfoSection" style="display: none; opacity: 1;float:left;clear:both">
+        <h2 class="win-h2 selectionTitle" style="display: block;"></h2>
+        <p class="selectionDescription" style="display: block;"></p>
+        <div class="sampleCodeContainer">
+           
+            <p>
+                </p><pre class="selectionSampleCodePre" style="display: block;">                    
+				<button class="win-button copyToClipboardButton" style="display: none;"></button>
+                    <code class="selectionSampleCode hljs " style="display: block;">
+					
+					</code>
+                </pre>
+            <p></p>
+        </div>
+        <a class="selectionDocumentation" href="http://msdn.microsoft.com/en-us/library/windows/apps/dn301804.aspx" target="_blank" style="display: block;"> <a class="win-link selectionDocumentation" href="#" target="_blank"></a> 
+        </a>
+        <div>
+            <input type="number" class="win-textbox textInput" hidden="hidden">
+        </div>
+    </div>
+
+    <div class="gitHubIssueOpener">
+        <a class="win-link" href="#" target="_blank">
+            
+            
+        </a>
+    </div>
+   
+    
+      <div class="garbageCan" style="opacity: 1;top:50px" id="garbageCan2">
+        
+    </div>
+     
+       <div class="garbageCan" style="opacity: 1;top:150px" id="garbageCan3">
+        
+    </div>
+
+    <div class="garbageCan" style="opacity: 1;" id="garbageCan">
+         
+    </div>
+
+    <div class="notificationBanner" style="background-color: rgb(0, 122, 204);">onLoadingStateChanged().  First visible item: 16, last visible item: 20</div>
+       
+<script>
+  
+  function add(){
+    
+    ListView.Data.addElement();
+    Config.itemsDraggable(1);
+  }
+  
+</script>
+
+</body></html>

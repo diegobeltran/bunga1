@@ -1,0 +1,132 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/*Hero Image*/
+
+.hero{
+    
+  background-color:transparent;
+  
+  vertical-align: top;
+  
+  overflow:hidden;
+  
+  
+}
+
+.sectionlist{
+    
+   
+    
+}
+
+
+.sectionbug{
+    
+   
+    
+}
+
+
+.emptysection{
+    
+    width:50%;
+    height: 20px;
+}
+.section {background-color:transparent ;}
+
+/*.win-hub-horizontal .section {width: 40%;height: 100%;}*/
+
+@media (min-width: 1280px) and (max-width:1366px)  {
+    
+  /* .win-hub-horizontal .hero {
+    
+    width: 650px;
+    
+    
+}*/
+  .sectionbug{
+    
+    width:650px; 
+    
+   }
+  
+  .sectionlist{
+    
+    width:650px; 
+    
+    }  
+    
+}
+
+@media (min-width: 1024px) and (max-width:1280px)  {
+    
+   /*.win-hub-horizontal .hero {
+    width: 650px;
+    }*/
+    
+     .sectionlist{
+    
+    width:330px; 
+    
+    }  
+    
+     .sectionbug{
+    
+    width:650px; 
+    
+   }
+    
+}
+@media (min-width: 850px) and (max-width:1024px)  {
+    
+   /*.win-hub-horizontal .hero {
+    width: 650px;
+    }*/
+    
+     .sectionlist{
+    
+    width:330px; 
+    
+    }  
+     .sectionbug{
+    
+    width:530px; 
+    
+   }
+}
+
+.win-hub-horizontal .hero {
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 0%;
+    margin-bottom: 4px;
+    height: 100%;
+    
+}
+
+.win-hub-section-header-content{
+    
+    color:#888
+    
+}
+
+.win-hub-section-content{
+    
+    margin-top: 0%;
+    height: 100%;
+    
+}
+.win-hub-section.hero .win-hub-section-header {
+    visibility: visible;
+   
+}
+
+.Packages{
+    
+    background-image: url(../images/Packages.png);
+    width: 60px;
+     height:  60px;
+    
+}

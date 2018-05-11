@@ -1,0 +1,154 @@
+﻿body {
+    background-color: black;
+    overflow: auto;
+}
+
+html, body {
+    height:100%;
+    width:100%;
+}
+
+.notificationBanner{
+    position: absolute;
+    background-color: #007ACC;
+    height: 24px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 180px;
+    overflow: hidden;
+    top: 100%;
+    width:calc(100% - 180px);
+    margin-top:-28px;
+}
+
+h1{
+    margin-left: 2%;
+    margin-top: 3%;
+    font-size:3vw;
+}
+
+.garbageCan{
+    position: absolute;
+    top: 80%;
+    left: 91%;
+    font-family: 'Segoe UI Symbol';
+    font-size: 5vw;
+}
+
+.listViewDocumentationToggle{
+    font-size: 1.5vw;
+    margin-top: 4%;
+    float:left;
+}
+
+.gitHubIssueOpener a{
+     cursor:pointer;
+     color: white;
+}
+
+.gitHubIssueOpener{
+    position: absolute;
+    top: 100%;
+    margin-top: -28px;
+    height: 24px;
+    color: white;
+    left:100%;
+    margin-left: -150px;
+    width: 150px;
+    text-align: center;
+    cursor:pointer;
+    z-index:2;
+    background-color: purple;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+
+@media (max-width: 1366px) and (min-width: 1101px) {
+    .garbageCan{
+       font-size: 7vw;
+       cursor:pointer;
+        top: 80%;
+        left: 89%;
+    }
+
+    h1{
+        font-size:3vw;
+        margin-left: 2%;
+        margin-top: 3%;
+    }
+
+     .listViewDocumentationToggle{
+        font-size: 1.5vw;
+        margin-top: 4%;
+        margin-left: 2%;
+        float:left;
+    }
+
+}
+
+@media (max-height: 800px){
+    .garbageCan{
+        top: 80%;
+    }
+}
+
+@media (max-height: 600px){
+    .garbageCan{
+        top: 60%;
+    }
+}
+
+@media (max-height: 700px) and (min-width: 1100px){
+    .garbageCan{
+        left: 80%;
+        top: 78%;
+        font-size:3.5vw;
+    }
+}
+
+@media (max-width: 1100px){
+    .listViewDocumentationToggle{
+        font-size: 1.5vw;
+        margin-left: 2%;
+        float:left;
+    }
+
+    .garbageCan{
+        font-size: 7vw;
+        cursor:pointer;
+        left: 86%;
+    }
+
+     h1{
+        font-size:4vw;
+        margin-left: 2%;
+        margin-top: 3%;
+    }
+}
+
+@media (max-width: 850px) and (min-height: 600px) {
+    .listViewDocumentationToggle{
+        font-size: 2vw;
+        margin-left: -40px;
+        float: left;
+    }
+
+    .garbageCan{
+        font-size: 9vw;
+        cursor:pointer;
+        left: 85%;
+        top: 83%;
+    }
+
+    h1{
+        font-size:4vw;
+        margin-left: 2%;
+        margin-top: 3%;
+    }
+}
+
+
+
+

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Using this metatag users can't scale the page using pinchIn/out gestures on mobile devices -->
+	<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+
+	<title>EaselJS demo: Resize</title>	
+
+	<style type="text/css">
+
+		/* Remove margins and HTML scrollbars */
+		BODY, HTML  {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+	</style>
+
+	<script src="lib/easeljs-NEXT.min.js"></script>
+    <script src="lib/easeljs-0.8.2.min.js"></script>
+	<script>
+
+		var stage;
+		var bg, logo;		
+		var content, monalisa;
+
+		// Resize event listener
+		window.addEventListener('resize', resize, false);
+
+		/**
+		 * Init handler
+		 */
+		function init() {
+
+			stage = new createjs.Stage("demoCanvas");
+			
+			createBackground();
+			createLogo();
+			createContent();
+			
+			//createjs.Ticker.addListener(this);
+            createjs.Ticker.addEventListener("tick", tick);
+
+       
+			resize();
+		}
+		
+		/**
+		 * create and display the background (fullscreen)
+		 */
+		function createBackground() {
+			
+			bg = new createjs.Shape();		
+			stage.addChild(bg);
+
+		}
+
+		/**
+		 * create and display logo (top-right)
+		 */
+		function createLogo() {
+
+			logo = new createjs.Bitmap("logo.png");
+			logo.y = 10;
+			stage.addChild(logo);
+
+		}
+		
+		 
+		/**
+		 * create content (centered)
+		 */
+		function createContent() {
+
+
+			content = new createjs.Container();
+			stage.addChild(content);
+
+			// Load the Monalisa Image
+			// (You should also use PreloadJS to avoid the onload listener)
+			monalisa = new Image();
+			monalisa.src = "mona.jpg";
+			monalisa.onload = handleImageLoad;
+			
+
+		}
+		
+		function handleImageLoad() {
+
+			// Create a CreateJS bitmap from the loaded image
+			var bmpMonaLisa = new createjs.Bitmap(monalisa);
+
+			// Add the bitmap to the Container
+			content.addChild(bmpMonaLisa);
+			
+			// Set the registration point of the content Container to center
+			content.regX = bmpMonaLisa.image.width/2
+			content.regY = bmpMonaLisa.image.height/2
+
+			// Set the scale value
+			// It could be useful to properly handle different mobile resolutions
+			content.scaleX = 0.5;
+			content.scaleY = 0.5;
+
+			
+		}
+
+
+		/**
+		 * Tick Handler
+		 */
+		function tick() {
+			
+			stage.update();
+		}	
+
+
+		/**
+		 * Resize event handler
+		 */
+		function resize() {
+
+			// Resize the canvas element
+		  	stage.canvas.width = window.innerWidth;
+	    	stage.canvas.height = window.innerHeight;	    	
+
+	    	// Logo: top-right position (canvasWidth - image width - 10 px padding)
+	    	logo.x = stage.canvas.width - 120 - 10
+
+	    	// Background: full screen redraw 
+	    	bg.graphics.clear()
+	    	bg.graphics.beginFill("#222").drawRect(0,0,stage.canvas.width,stage.canvas.height);
+	    	
+	        // Content: centered
+	        content.x = stage.canvas.width / 2;
+	        content.y = stage.canvas.height / 2;
+	    }
+
+
+	</script>
+</head>
+<body onLoad="init();">
+	<canvas id="demoCanvas" width="300" height="100"  >
+		alternate content
+	</canvas>
+</body>
+</html>

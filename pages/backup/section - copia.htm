@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://gridster.net/demos/resize.html -->
+<html hc="a0" hcx="0"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta name="msapplication-tap-highlight" content="no">
+     
+  <title>Section</title>
+  <link rel="stylesheet" type="text/css" href="../css/jquery.gridster.css">
+  <link rel="stylesheet" type="text/css" href="../css/templatesize.css">
+ 
+  <link href="../css/ui-dark.css" rel="stylesheet">
+ <script src="../winjs/base.min.js"></script>
+    <script src="../winjs/ui.min.js"></script><style></style>
+   
+    <!-- jquery  -->
+        <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+   <!-- <script type="text/javascript" src="../js/jquery.min.js"></script>-->
+       
+
+  
+      
+      
+
+       
+
+        <!-- Bootstrap -->
+        <link href="./Alpaca - Quickstart (Bootstrap)_files/bootstrap.css" rel="stylesheet" media="screen">
+        <link type="text/css" href="./Alpaca - Quickstart (Bootstrap)_files/bootstrap-theme.css" rel="stylesheet">
+        <script type="text/javascript" src="./Alpaca - Quickstart (Bootstrap)_files/bootstrap.js"></script>
+
+        <!-- Handlebars -->
+        <script type="text/javascript" src="./Alpaca - Quickstart (Bootstrap)_files/handlebars.js"></script>
+
+        <!-- Alpaca -->
+        <script type="text/javascript" src="./Alpaca - Quickstart (Bootstrap)_files/alpaca.js"></script>
+        <link type="text/css" href="./Alpaca - Quickstart (Bootstrap)_files/alpaca.css" rel="stylesheet">
+
+        <!-- Custom Files -->
+        <script type="text/javascript" src="./Alpaca - Quickstart (Bootstrap)_files/form.js"></script>
+        <link type="text/css" href="./Alpaca - Quickstart (Bootstrap)_files/form.css" rel="stylesheet">
+        
+        <script src="../js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css"> 
+ 
+
+
+.test {
+     clear: both;
+    background-color: #36AEF0;
+    outline: 2px white solid;
+    z-index: 2;
+    box-shadow: 0 0 20px 1px #000000;
+}
+
+
+.gridster li {
+  
+    outline: 2px white solid;
+    z-index: 2;
+    box-shadow: 0 0 20px 1px #000000;
+}
+
+
+
+
+</style>
+
+   <script type="text/javascript">
+       var listviewselectedindex;
+      //document.domain = "mydomain.com";
+    
+     var selectitemxs;
+      var gridster;
+       var contador=1;                        
+      // same object than generated with gridster.serialize() method
+      var serialization = [
+        {
+            col: 1,
+            row: 1,
+            size_x: 2,
+            size_y: 2
+        },
+        {
+            col: 3,
+            row: 1,
+            size_x: 1,
+            size_y: 2
+        },
+        {
+            col: 4,
+            row: 1,
+            size_x: 1,
+            size_y: 1
+        },
+        {
+            col: 2,
+            row: 3,
+            size_x: 3,
+            size_y: 1
+        },
+        {
+            col: 1,
+            row: 4,
+            size_x: 1,
+            size_y: 1
+        },
+        {
+            col: 1,
+            row: 3,
+            size_x: 1,
+            size_y: 1
+        },
+        {
+            col: 2,
+            row: 4,
+            size_x: 1,
+            size_y: 1
+        },
+        {
+            col: 2,
+            row: 5,
+            size_x: 1,
+            size_y: 1
+        }
+      ];
+
+
+      // sort serialization
+      serialization = Gridster.sort_by_row_and_col_asc(serialization);
+     
+     
+     function creategrid() {
+           
+            gridster.remove_all_widgets();
+            alert('');
+            $.each(serialization, function() {
+                gridster.add_widget('<li onfocus="selectitemf(li_' + contador +');" tabindex="' 
+                + contador +'" id="li_' + contador +'"   onclick="selectitem(li_' + contador +');">' 
+                + contador +'</>', this.size_x, this.size_y, this.col, this.row);
+                contador=contador+1;
+            });
+            serialize();
+        }
+       var triggermethod=0;
+       
+       function selectitem(e){
+           
+           
+          //$('.gridster').find('li').removeClass('test');
+         
+           //$(e).addClass('test');
+           
+           $(e).focus();
+           
+       }
+       
+     
+        function selectitemf(e){
+          
+         
+          $('.gridster').find('li').removeClass('test');
+         
+           $(e).addClass('test');
+           
+           serialize();
+           
+            selectitemxs=e;
+           //$(e).focus();
+           
+       }
+
+       function serialize() {
+            var s = gridster.serialize();
+            //JSON.stringify(s)
+            $('#log').val(JSON.stringify(s));
+        }
+        
+        function addWid() {
+             
+             gridster.add_widget('<li onfocus="selectitemf(li_' + contador +');" tabindex="' + contador 
+             +'" id="li_' + contador +'"   onclick="selectitem(li_' + contador +');">' 
+             + contador +'</>', 1, 1, 1, contador);
+             
+             contador=contador+1;
+            
+        }
+    
+       function removeWid()
+       {
+           gridster.remove_widget( selectitemxs );
+           
+            reCreate(); 
+       }
+       
+        function reCreate()
+        
+       {
+            // sort serialization
+            
+            var serxs= gridster.serialize();
+           
+            serialization = Gridster.sort_by_row_and_col_asc(serxs);
+           
+            contador=1;
+            
+            creategrid();
+            
+            serialize();
+       }
+       //Show the flyout
+    function showConfirmFlyout() {
+      
+    var buyButton = document.getElementById("section1settings");
+    $("#confirmFlyout").toggle();
+    var settingstittle = document.getElementById("settingstittle");
+    
+    if(selectitemxs!=undefined)
+    {
+        
+        settingstittle.innerHTML="Widget " + selectitemxs.innerHTML;
+    }
+    else{
+        
+        settingstittle.innerHTML="No Widget Selected";
+    }
+    
+   
+    
+    }
+    </script>
+
+</head>
+
+<body style="width:100%;height:100%; background:#000; " >
+
+ <div style="position:fixed;top:-1%;width:100%;color:#000;z-index:100" >
+ <!--<a style="float:right;font-size:1.5em;" id="filter" href="">sorted alphabeticallyxxxxxx</a> 
+           <a href="#" onclick="creategrid();">create </a>
+        <a href="#" onclick="addWid();">AddWidget </a>
+        <a href="#" onclick="removeWid();">RemoveWidget </a>-->
+   
+    <button id="section1settings" data-win-control="WinJS.UI.AppBarCommand" style="float:right;" 
+ data-win-options="{id:'cmd',  icon:'settings'}" type="button"></button>
+    <button id="section1minus" data-win-control="WinJS.UI.AppBarCommand" style="float:left" 
+ data-win-options="{id:'cmd',  icon:'remove'}" type="button"></button>
+ <button id="section1Add" data-win-control="WinJS.UI.AppBarCommand" style="float:left" 
+data-win-options="{id:'cmd',  icon:'add'}" type="button"></button>
+
+</div>
+  <!-- Scenario Controls -->
+<div id="confirmFlyout"  aria-label="{Confirm purchase flyout}"   
+style="display:none;width:90%;position:absolute;z-index:100;background-color:#000; opacity: 0.6;
+    filter: alpha(opacity=60);  border-style: solid;
+    border-color: #0000ff #0000ff;">
+    <div id="settingstittle" style="width:300px;margin-left:20%">Settings</div>
+    <ul  class="nav nav-pills">
+			<li class="active">
+        <a  href="#1a" data-toggle="tab">General</a>
+			</li>
+			<li><a href="#2a" data-toggle="tab">Widget</a>
+			</li>
+			  		
+		</ul>
+        <div class="tab-content clearfix">
+			  <div class="tab-pane active" id="1a">
+          <h3>Content's background color is the same for the tab</h3>
+				</div>
+				<div class="tab-pane" id="2a">
+          <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="form" class="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+				</div>
+                </div>
+     
+</div>
+    <ul  class="nav nav-pills">
+			<li class="active">
+        <a  href="#" data-toggle="tab">Mode1</a>
+			</li>
+			<li><a href="#" data-toggle="tab" onclick="creategrid()">Mode2</a>
+			</li>
+			  <li><a href="#" data-toggle="tab">Mode3</a>
+			</li>		
+		</ul>
+  <div class="gridster ready" style="margin-top:6%;overflow:scroll">
+    <ul style="position: relative;">
+     
+    </ul>
+  </div>
+
+     
+
+    <script type="text/javascript">
+      var gridster;
+      
+      $(function(){
+
+        gridster = $(".gridster ul").gridster({
+          widget_base_dimensions: [100, 55],
+          widget_margins: [5, 5],
+          helper: 'clone',
+         // max_cols:null,
+          resize: {
+            enabled: true
+          }
+        }).data('gridster');
+
+         
+        $('.js-resize-random').on('click', function() {
+            gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
+                getRandomInt(1, 4), getRandomInt(1, 4))
+        });
+
+      });
+     
+    
+   
+        // Wire XYFocus up to the arrow keys
+WinJS.UI.XYFocus.keyCodeMap.up.push(WinJS.Utilities.Key.upArrow);
+WinJS.UI.XYFocus.keyCodeMap.down.push(WinJS.Utilities.Key.downArrow);
+WinJS.UI.XYFocus.keyCodeMap.left.push(WinJS.Utilities.Key.leftArrow);
+WinJS.UI.XYFocus.keyCodeMap.right.push(WinJS.Utilities.Key.rightArrow);
+
+//WinJS.UI.processAll();
+ WinJS.UI.processAll().then(function () {
+         
+    document.getElementById("section1minus").addEventListener("click", removeWid, false);
+    document.getElementById("section1Add").addEventListener("click", addWid, false);
+    document.getElementById("section1settings").addEventListener("click", showConfirmFlyout, false);
+    
+    //document.getElementById("notificationBanner").addEventListener("change", selectlistview, false);
+    
+        
+    });
+    
+    ////////////form
+    
+      
+    </script>
+
+ <textarea id="log"></textarea>
+  
+
+</body></html>

@@ -1,0 +1,5 @@
+[ZoneTransfer]
+HostIpAddress=192.30.253.121
+ZoneId=3
+ReferrerUrl=https://github.com/jdorn/json-editor
+HostUrl=https://codeload.github.com/jdorn/json-editor/zip/master

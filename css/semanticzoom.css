@@ -1,0 +1,147 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/*Semantic Zoom*/
+.SeZo {
+    width: 100%;
+    height: 93%;
+    position: absolute ;
+}
+
+/*Zoomed Out View of the hub**/
+.ZoomedOutListView {
+    width: 100%;
+    height: 100%;
+}
+
+    .ZoomedOutListView .win-surface {
+        height: calc(100% - 240px);
+        margin-top: 180px;
+        margin-left: 120px;
+        width: auto;
+    }
+
+    .ZoomedOutListView .win-item {
+        width: 270px;
+        height: 140px;
+        overflow: hidden;
+        display: flex;
+        flex-align: center;
+       
+       /*     justify-content: center;
+        flex-flow: column;
+        font-size: xx-large;
+        background-color: #777; */
+    }
+
+
+.ZoomedOutItem {
+    display: inline-block;
+    text-align: left;
+    max-width: 100%;
+   max-height : 100%;
+   height: 100%;
+  /*   vertical-align: text-bottom;
+   background-repeat: no-repeat;
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: bold;
+   color: #000;*/
+   
+   
+   top: 5%;
+   background-position: left center; 
+     -ms-display: flex;
+     display: flex;
+  /* alineacion vertical */
+  align-items:  center;
+   /* alineacion horizontal */
+  justify-content: space-around;
+
+}
+/*==== 2.23 Title Animation ====*/
+
+.ZoomedOutListView .win-item .titlex{
+     /* alineacion vertical */
+  align-items: flex-end ;
+   /* alineacion horizontal */
+  justify-content:  space-around;
+  color:#fff;
+  
+  text-indent:20px;
+  
+  margin-top: -10%;
+  
+  font-size:0.4em;
+    
+}
+
+
+.ZoomedOutListView .win-item .titlex-indent:hover .titlex{
+    text-indent:20px;
+    color:#00a;
+}
+.ZoomedOutListView .win-item .titlex-fade:hover .titlex{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+}
+.ZoomedOutListView .win-item .title-scaleup:hover .titlex{
+    -webkit-transform: scale(1.2); 
+    -moz-transform: scale(1.2); 
+    -ms-transform: scale(1.2); 
+    -o-transform: scale(1.2); 
+    transform: scale(1.2); 
+}
+.ZoomedOutListView .win-item .titlex-scaledown:hover .titlex{
+    -webkit-transform: scale(0.8); 
+    -moz-transform: scale(0.8); 
+    -ms-transform: scale(0.8); 
+    -o-transform: scale(0.8); 
+    transform: scale(0.8); 
+}
+ .ZoomedOutListView .win-item .titlex-fadein .titlex{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+}
+.ZoomedOutListView .win-item .titlex-fadein:hover .titlex{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+}
+.ZoomedOutListView .win-item .titlex-fadeout:hover .titlex{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+}
+.ZoomedOutListView .win-item .titlex-verticalcenter:hover .titlex{
+    bottom:50%;
+    margin-bottom:-6px;
+}
+.ZoomedOutListView .win-item .titlex-horizontalcenter .titlex{
+    text-align:center;
+}
+.ZoomedOutListView .win-item .titlex-horizontalcenter:hover .titlex{
+    left:0;
+    text-align:center;
+    width:100%;
+}
+.ZoomedOutListView .win-item .titlex-center .titlex{
+    text-align:center;
+}
+.ZoomedOutListView .win-item .titlex-center:hover .titlex{
+    left:0;
+    text-align:center;
+    width:100%;
+    bottom:50%;
+    margin-bottom:-6px;
+}

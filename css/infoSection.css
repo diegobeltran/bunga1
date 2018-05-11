@@ -1,0 +1,133 @@
+﻿.interactiveInfoSection{
+    height: 60%;
+    width: 34%;
+    margin-bottom: 0.5%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    float: left;
+    margin-top: 5%;
+    margin-left: 1%;
+    overflow: visible;
+    user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    font-size: 1vw;
+    cursor: text;
+}
+
+
+.selectionSampleCode{
+    max-height: 400px;
+    overflow: auto;
+    font-size: 0.8vw;
+}
+
+.copyToClipboardButton{
+    position: absolute;
+    left: 90%;
+    top: 45px;
+    min-width: 0px;
+    width: 30px;
+    height: 20px;
+    font-family: 'Segoe UI Symbol';
+    padding: 0px;
+}
+
+.sampleCodeContainer{
+    position: relative;
+}
+
+pre.selectionSampleCodePre{
+    margin-bottom: 0px;
+    max-height: 450px;
+}
+
+.selectionDocumentation{
+    text-decoration: underline;
+}
+
+.interactiveInfoSection h2{
+    margin-bottom: 2%;
+    font-size: 2vw;
+}
+
+@media (max-width: 900px) {
+
+    .interactiveInfoSection{
+        font-size: 2vw;
+    }
+
+    .interactiveInfoSection h2 {
+        font-size: 4vw;
+    }  
+
+}
+
+@media (max-width: 1100px) and (min-width: 901px)  {
+
+    .interactiveInfoSection{
+        font-size: 1.5vw;
+    }
+
+    .interactiveInfoSection h2 {
+        font-size: 3.5vw;
+    }  
+
+    .selectionSampleCode{
+        font-size: 1.2vw;
+    }
+
+}
+
+@media (max-width: 1366px){
+    .interactiveInfoSection {
+        margin-left: 1.5%;
+        width: 50%;
+    }
+}
+
+
+@media (max-width: 1366px) and (min-width: 1101px) {
+
+    .interactiveInfoSection{
+        margin-left: 1.5%;
+        width: 50%;
+        font-size: 1.2vw;
+    }
+
+    .selectionSampleCode{
+        max-height: 200px;
+        overflow: auto;
+        font-size: 1.2vw;
+    }
+
+    .interactiveInfoSection h2 {
+        font-size: 2.5vw;
+    }  
+
+}
+
+@media (max-width: 850px) and (min-height: 600px){
+
+     .interactiveInfoSection{
+        margin-left: 1.5%;
+        width: 82%;
+        font-size: 2.2vw;
+         height: 50%;
+    }
+
+    .selectionSampleCode{
+        max-height: 200px;
+        overflow: auto;
+        font-size: 1.9vw;
+    }
+
+    .interactiveInfoSection h2 {
+        font-size: 3.5vw;
+    }  
+  
+}
+
+

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://dsmorse.github.io/gridster.js/demos/responsive.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Gridster Responsive Demo</title>
+
+    <link rel="stylesheet" type="text/css" href="./Gridster Responsive Demo_files/demo.css">
+    <link rel="stylesheet" type="text/css" href="./Gridster Responsive Demo_files/jquery.gridster.min.css">
+    <script src="./Gridster Responsive Demo_files/jquery.min.js"></script>
+    <script src="./Gridster Responsive Demo_files/jquery.gridster.min.js" type="text/javascript" charset="utf-8"></script>
+    
+     <script src="./js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+     var serialization = [
+        {
+            col: 1,
+            row: 1,
+            size_x: 2,
+            size_y: 2
+        },
+        {
+            col: 3,
+            row: 1,
+            size_x: 1,
+            size_y: 2
+        },
+        {
+            col: 4,
+            row: 1,
+            size_x: 1,
+            size_y: 1
+        },
+        {
+            col: 2,
+            row: 3,
+            size_x: 3,
+            size_y: 1
+        },
+        {
+            col: 1,
+            row: 4,
+            size_x: 1,
+            size_y: 1
+        },
+        {
+            col: 1,
+            row: 3,
+            size_x: 1,
+            size_y: 1
+        },
+        {
+            col: 2,
+            row: 4,
+            size_x: 1,
+            size_y: 1
+        },
+        {
+            col: 2,
+            row: 5,
+            size_x: 1,
+            size_y: 1
+        }
+      ];
+
+
+      // sort serialization
+      serialization = Gridster.sort_by_row_and_col_asc(serialization);
+     
+     
+     function creategrid() {
+           
+            gridster.remove_all_widgets();
+            
+            $.each(serialization, function() {
+                gridster.add_widget('<li onfocus="selectitemf(li_' + contador +');" tabindex="' 
+                + contador +'" id="li_' + contador +'"   onclick="selectitem(li_' + contador +');">' 
+                + contador +'</>', this.size_x, this.size_y, this.col, this.row);
+                contador=contador+1;
+            });
+            //serialize();
+        }
+        
+    </script>
+<style id="gridster-stylesheet" type="text/css"> [data-col="1"] { left:5px; }
+ [data-col="2"] { left:231.33333333333334px; }
+ [data-col="3"] { left:457.6666666666667px; }
+ [data-col="4"] { left:684px; }
+ [data-col="5"] { left:910.3333333333334px; }
+ [data-col="6"] { left:1136.6666666666667px; }
+ [data-col="7"] { left:1363px; }
+ [data-row="1"] { top:5px; }
+ [data-row="2"] { top:150px; }
+ [data-row="3"] { top:295px; }
+ [data-row="4"] { top:440px; }
+ [data-row="5"] { top:585px; }
+ [data-row="6"] { top:730px; }
+ [data-row="7"] { top:875px; }
+ [data-row="8"] { top:1020px; }
+ [data-row="9"] { top:1165px; }
+ [data-row="10"] { top:1310px; }
+ [data-row="11"] { top:1455px; }
+ [data-row="12"] { top:1600px; }
+ [data-row="13"] { top:1745px; }
+ [data-row="14"] { top:1890px; }
+ [data-row="15"] { top:2035px; }
+ [data-row="16"] { top:2180px; }
+ [data-sizey="1"] { height:140px; }
+ [data-sizey="2"] { height:285px; }
+ [data-sizey="3"] { height:430px; }
+ [data-sizey="4"] { height:575px; }
+ [data-sizey="5"] { height:720px; }
+ [data-sizey="6"] { height:865px; }
+ [data-sizey="7"] { height:1010px; }
+ [data-sizey="8"] { height:1155px; }
+ [data-sizey="9"] { height:1300px; }
+ [data-sizey="10"] { height:1445px; }
+ [data-sizey="11"] { height:1590px; }
+ [data-sizey="12"] { height:1735px; }
+ [data-sizey="13"] { height:1880px; }
+ [data-sizey="14"] { height:2025px; }
+ [data-sizey="15"] { height:2170px; }
+ [data-sizex="1"] { width:221.33333333333334px; }
+ [data-sizex="2"] { width:447.6666666666667px; }
+ [data-sizex="3"] { width:674px; }
+ [data-sizex="4"] { width:900.3333333333334px; }
+ [data-sizex="5"] { width:1126.6666666666667px; }
+ [data-sizex="6"] { width:1353px; }
+</style></head>
+<body>
+<div class="content">
+ <a onclick="creategrid();">crea</a>
+</div>
+<div class="gridster ready">
+    <ul >
+        
+    </ul>
+</div>
+<script>
+   
+    var gridster = null;
+        $(document).ready(function () {
+            gridster = $(".gridster ul").gridster({
+                widget_base_dimensions: ['auto', 140],
+                autogenerate_stylesheet: true,
+                min_cols: 1,
+                max_cols: 6,
+                widget_margins: [5, 5],
+                resize: {
+                    enabled: true
+                }
+            }).data('gridster');
+            $('.gridster  ul').css({'padding': '0'});
+        });
+      
+        
+    
+</script>
+
+
+
+</body></html>

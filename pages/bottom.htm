@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Drag and Drop Interaction Ideas | Bottom Slide</title>
+		<meta name="description" content="Inspiration for drag and drop interactions for the modern UI" />
+		<meta name="keywords" content="drag and drop, interaction, inspiration, web design, ui" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		
+		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+		
+		
+		<link rel="stylesheet" type="text/css" href="../css/sidebar.css" />
+		<link rel="stylesheet" type="text/css" href="../css/component.css" />
+		<link rel="stylesheet" type="text/css" href="../css/componentsearch.css" />	
+		<!-- solo para poner el icono en el menu -->
+		<link rel="stylesheet" type="text/css" href="../css/componentmenu.css" />
+		
+	 <!-- WinJS references -->
+    <link href="../css/ui-dark.css?v1.0.143" rel="stylesheet" />
+    <script src="../winjs/base.min.js?v1.0.143"></script>
+    <script src="../winjs/ui.min.js?v1.0.143"></script>
+
+    <!-- Other Library references-->
+    <script src="../js/highlight.pack.js"></script>
+
+    <!-- ListView-Test references -->
+    <link href="../css/default.css" rel="stylesheet" />
+    <link href="../css/listView.css" rel="stylesheet" />
+    <link href="../css/controlBox.css" rel="stylesheet" />
+    <link href="../css/infoSection.css" rel="stylesheet" />
+    <link href="../css/customHighlightStyle.css" rel="stylesheet" />
+    <script src="../js/default.js"></script>
+    <script src="../js/listViewConfigChanges.js"></script>
+    <script src="../js/listViewData.js"></script>
+    <script src="../js/initialize.js"></script>
+    <script src="../js/listViewTemplates.js"></script>
+    <script src="../js/listViewLayoutChanges.js"></script>
+    <script src="../js/listViewMethods.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/documentation.js"></script>
+    <script src="../js/controlBox.js"></script>
+    <script src="../js/controlBoxTemplate.js"></script>
+    <script src="../js/controlBoxData.js"></script>
+    <script src="../js/garbageCan.js"></script>
+    <script src="../js/simpleFlipper.js"></script>
+    <script src="../js/gitHubIssue.js"></script>
+    <script src="../js/draggabilly.pkgd.js"></script>
+    <script src="../js/store.js"></script>  
+ 
+   <!--store.set('_currentprocess', null);
+       store.get('_currentprocess');
+   if (!store.enabled) {
+            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
+            return;
+        }
+   
+   
+   -->
+		
+		
+		
+		<style type="text/css">
+		body {
+	background: #000;
+	color: #fff;
+	font-weight: 400;
+	font-size: 1em;
+	font-family: 'Raleway', Arial, sans-serif;
+					}
+					
+					
+.skin-5 { background: #000; color: #aaaa9f; }
+.skin-5 a { color: #fff; }
+.skin-5 a:hover, .skin-4 a:focus { color: #737369; }
+
+
+.content {
+	top: -25px;
+	text-align: left;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+     height: 100%;
+}
+
+.container {
+	
+	
+ 
+}
+
+
+		ul { margin:5px; padding:0px; margin-left:20px;border:solid 1px }
+		.list2 {float:right; width:90%; list-style-type:none; margin:0px;color:#ff0;
+		;border:solid 0px; 
+		z-index: 100;position: absolute;font-weight: bold;font-size: 2em;
+		width:3em !important;
+		z-index:10001;
+		}
+		
+		.list2 li { float:left; padding:0px; width:100px;  }
+		
+		.list2 div { width:90px; border:solid 1px black; 
+		background: #F90;
+  		 text-align: center; padding-top:0px; height:4em }
+		
+		.placeHolder div { background-color:blue !important;padding-top:30px; border:dashed 1px gray !important; }
+		
+		.drop-area__item2{
+			
+			 width:85%; list-style-type:none; margin:0px;
+		background-color:red;border:solid 1px black; 
+		
+		height: 5em;
+			
+		}
+		
+		
+.contentx{
+	background: #049;
+	font-size: 0.9em;
+	color:#fff;
+	padding: 5px;
+	margin:0.3em;
+	 border-radius: 7px;
+	 width:6em;
+     position:relative;
+	 z-index:1000;
+}
+
+.grid__li{
+	background: #005;
+	font-size: 0.9em;
+	color:#fff;
+	padding: 5px;
+	margin:0.3em;
+	width:30px;
+	height:3.7em;
+	
+	position: absolute;
+	float:center;
+}
+	</style>
+	
+	   <style>      
+        
+        #messageList {
+	width: 390px;
+	height: calc(100% - 38px);
+	border: 1px solid silver;
+	margin-top: 4px;
+}
+
+#messageList.wide {
+	min-width: 390px;
+	width: calc(100% - 5px);
+}
+
+.win-pivot-item .win-pivot-item-content {
+	padding: 0 0 0 12px;
+}
+
+.message {
+	width: calc(100% - 48px);
+	min-width: 312px;
+	height: 48px;
+	margin-bottom: 1px;
+	padding: 16px 24px;
+	background-color: #2B2B2B;
+}
+
+.userIcon {
+	width: 48px;
+	height: 48px;
+	float: left;
+	margin-right: 12px;
+}
+
+.messageContent {
+	width: calc(100% - 60px);
+	height: 48px;
+	float: left;
+}
+
+.contactInformation {
+	width: 100%;
+	height: 16px;
+}
+
+.contactName {
+	height: 16px;
+	float: left;
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 15px;
+}
+
+.contactTime {
+	width: 40px;
+	height: 16px;
+	float: right;
+	text-align: right;
+	font-size: 12px;
+	line-height: 12px;
+	color: rgba(255, 255, 255, .4);
+}
+
+.messagePreview {
+	width: 100%;
+	height: 32px;
+	font-size: 12px;
+	line-height: 16px;
+	overflow: hidden;
+	color: rgba(255, 255, 255, .4);
+}
+
+    </style>
+
+	<script>
+		var listviewselectedindex;
+		var toggleWifi = function() {
+        var obj = document.getElementById("dragToggle").winControl;
+		loaddrag(obj.checked);
+    //alert("Wifi toggled. Current status: " + (obj.checked ? "on" : "off"));
+     }
+
+// To protect against untrusted code execution, all functions are required to be marked as supported for processing before they can be used inside a data-win-options attribute in HTML markup.
+WinJS.Utilities.markSupportedForProcessing(toggleWifi);
+
+WinJS.UI.processAll();
+	</script>		
+    <script src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/Sortable.js"></script>
+    <script src="../js/modernizr.custom.js"></script>
+	<script src="../js/draggabilly.pkgd.min.js"></script>
+	<script src="../js/dragdrop.js"></script>
+	</head>
+	<body class="skin-5">
+    <input class="notificationBanner" style="color:red" >
+    </input>
+	
+		<div class="container">
+			
+			<div style="float:center;position:relative;display:fixed">
+				<div id="sb-search" class="sb-search">
+						<form>
+							<input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" id="search">
+								
+							<input class="sb-search-submit" type="submit" value="">
+							<span class="sb-icon-search"></span>
+						</form>
+			</div>
+			<div id="dragToggle" style="float:center;position:relative;display:inline-block" data-win-control="WinJS.UI.ToggleSwitch" 
+			data-win-options="{title: 'Asign', checked: false, onchange: toggleWifi}">
+			</div>
+			<div id="sortedToggle" style="float:center;position:relative;display:inline-block" data-win-control="WinJS.UI.ToggleSwitch" 
+			data-win-options="{title: 'Sorted', checked: false, onchange: toggleWifi}">
+			</div>
+			
+			</div>
+			<!--<button class="win-button" onclick="loaddrag();VerMode();">test</button>
+					<button class="win-button" onclick="VerMode();">testu</button>
+			        <button class="win-button" onclick="loadDrag();return false;">nhhhh</button>-->
+					
+			<!-- Top Navigation -->
+			
+			
+			<div class="content">
+				
+				
+			<form class="ac-custom ac-checkbox ac-diagonal" autocomplete="off" id="grid">		
+             
+			  <div class="listIconTextTemplate" id="listIconTextTemplate" data-win-control="WinJS.Binding.Template"  style="display: none">
+              <img src="#" class="listIconTextItem-Image" data-win-bind="src: picture" />
+              <div class="listIconTextItem-Detail">
+              <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+              <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+              </div>
+             </div>
+             <div class="listViewSection" style="width:90%;margin-top:0%;overflow-y: scroll;">
+              <div class="win-selectionstylefilled listView" id="listViewx"
+             data-win-control="WinJS.UI.ListView"
+             data-win-options="{
+                 itemDataSource: ListView.smallData.dataSource
+                 
+				 }">
+             </div>
+                  </div>    	
+  
+  
+               <div id="drop-area" class="drop-area" style="top:18%">
+			   <div>
+				
+				<div class="dummy"><a href="#" onclick="Volver();" style=" color:yellow;  ">Back</a></div>
+				
+				<div class="drop-area__item" style="text-aling:left" id="da1"  onclick="expand(this);">
+					<ul class="list2" id="list2_1" >
+					<li style="left:40px;">1</li>
+					</ul>
+					
+				</div>
+				
+				<div class="drop-area__item" id="da2">
+					<ul class="list2" id="list2_2" >
+					<li>2</li>
+					</ul>
+					</div>
+					
+				<div class="drop-area__item" id="da4">
+					<ul class="list2" id="list2_3" >
+					<li>3</li>
+					</ul>
+				</div>
+				
+				<div class="drop-area__item" id="da5">
+					<ul class="list2" id="list2_4" >
+					<li>4</li>
+					</ul>
+				</div>
+				<div class="drop-area__item" id="da6">
+					<ul class="list2" id="list2_5" >
+					<li>5</li>
+					</ul>
+				</div>
+				<div class="drop-area__item" id="da7">
+					<ul class="list2" id="list2_6" >
+					<li>6</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="drop-overlay"></div>
+  
+  
+  
+				</form>
+				
+				<div class="related" >
+					
+					
+					<a href="#">
+						
+						<h3></h3>
+					</a>
+					<a href="#">
+						
+						<h3></h3>
+					</a>
+				</div>
+				
+					
+
+				<!-- Related demos -->
+				
+			</div><!-- /content -->
+		</div><!-- /container -->
+		 <div id="dvSettings" style="display:block">
+    <div class="controlBoxArea">
+    </div>
+    <div class="controlBoxArea">
+    </div>
+    </div>		
+		<div id="drop-settings" class="drop-area" style="background:#fff">
+			<div class="dummy">
+					
+				<nav class="codrops-demos">
+				<a href="#" onclick="VolverSettings();" style=" color:yellow;  ">Back</a>
+			
+				</nav>
+				</div>
+			
+			
+			</div>
+			
+		
+		
+		
+		
+		<!--<div class="drop-area__item"><i class="fa fa-fw fa-file-word-o"></i></div> <i class="fa fa-fw fa-file-excel-o"></i>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-archive-o"></i></div><i class="fa fa-fw fa-file-pdf-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-text-o"></i></div><i class="fa fa-fw fa-file-sound-o"></i>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-archive-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-image-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-powerpoint-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-code-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-excel-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-pdf-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-sound-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-word-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-archive-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-text-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-archive-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-image-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-powerpoint-o"></i></div>
+				<div class="drop-area__item"><i class="fa fa-fw fa-file-code-o"></i></div> -->
+				
+	
+		<script>
+			
+			var createname=0;
+			var currentname='';
+			var currentid='';
+			var currentarea;
+			var sizeactual='';
+			function expand(e){
+				
+				//classie.remove( e, 'drop-area__item' );
+				if(sizeactual=='')
+				{
+					
+					$(e).css("height", "20em");
+					sizeactual=$(e).css("height");
+					
+					
+				}
+				else{
+					$(e).css("height", "6em");
+					sizeactual='';
+				}
+				
+				
+			}
+			
+			function VerSettings(){
+				
+				var dropAreatmp = document.getElementById( 'drop-settings' )	
+				classie.add( dropAreatmp, 'show' );
+				
+			}
+			
+			function VolverSettings(){
+				
+				var dropAreatmp = document.getElementById( 'drop-settings' )	
+				classie.remove( dropAreatmp, 'show' );
+				
+			}
+			function Volver(){
+				
+				var dropAreatmp = document.getElementById( 'drop-area' )	
+				classie.remove( dropAreatmp, 'show' );
+				
+			}
+			
+			function VerMode(){
+			
+			
+			var dropAreatmp = document.getElementById( 'drop-area' )	
+				classie.add( dropAreatmp, 'show' );
+				
+			}
+			
+			
+			//(
+				var body = document.body,
+					dropArea = document.getElementById( 'drop-area' ),
+					droppableArr = [], dropAreaTimeout;
+				    draggable = [];
+					///Ejecutar el switch assign
+				function loaddrag(disable) {
+				
+				if(disable==false){
+					
+					document.location.reload();
+					
+				   }		
+				else
+				   
+				   classie.add( dropArea, 'show' );
+				   
+				[].slice.call( document.querySelectorAll( '#drop-area .drop-area__item' )).forEach( function( el ) {
+					//Sortable.create($(el).find("ul").get(0), {
+		        	//animation: 150,
+					//filter: '.js-remove',
+					//onFilter: function (evt) {
+					//evt.item.parentNode.removeChild(evt.item);
+					//}
+	    			//});
+					droppableArr.push( new Droppable( el, {
+						onDrop : function( instance, draggableEl ) {
+							// show checkmark inside the droppabe element
+							classie.add( instance.el, 'drop-feedback' );
+							clearTimeout( instance.checkmarkTimeout );
+							createname=createname +1;
+							
+							//$(instance.el).find('.list2').append('<div class="draggable" id="' + 'btn' + createname +'">ahhhh</div>');
+							//xname= xname+1;
+				            //$(instance.el).find(".list2").append("<li><div ><span class='contentx'>"+xname.toString()+
+							//"</span><span id='close' onclick='closediv(this);'>x</span></div></li>");
+			                currentarea=instance.el;
+						   
+							
+							instance.checkmarkTimeout = setTimeout( function() { 
+								classie.remove( instance.el, 'drop-feedback' );
+							}, 800 );
+							// ...
+						}
+					} ) );
+				} );
+
+				// initialize draggable(s)
+				[].slice.call(document.querySelectorAll( '#grid .win-container' )).forEach( function( el ) 
+				{   //alert('');
+					new Draggable( el, droppableArr, {
+						draggabilly : { containment: document.body },
+						scroll : true,
+						scrollable : '#drop-area',
+						scrollSpeed : 70,
+						scrollSensitivity : 90,
+						onStart : function() {
+							//alert('');
+							// add class 'drag-active' to body
+							//$(el).css('z-index','100');
+							//$(el).css('position', 'absolute');
+							$(el).css('width', '120%');
+						    //$('#drop-area').css('z-index','50')
+							classie.add( body, 'drag-active' );
+							// clear timeout: dropAreaTimeout (toggle drop area)
+							clearTimeout( dropAreaTimeout );
+							// show dropArea
+							classie.add( dropArea, 'show' );
+						},
+						onEnd : function( wasDropped ) {
+							var afterDropFn = function() {
+								// hide dropArea
+								//classie.remove( dropArea, 'show' );
+								// remove class 'drag-active' from body
+								classie.remove( body, 'drag-active' );
+								$(el).css('width', '100%');
+								//$(el).css('z-index','0');
+								//$(el).css('z-index','0');
+								//$(el).css('left', '0');
+								//$(el).css('position', 'relative');
+							};
+
+							if( !wasDropped ) {
+								afterDropFn();
+							}
+							else {
+								// after some time hide drop area and remove class 'drag-active' from body
+								//alert('');
+								//currentname=$(el).find('label').html();
+								//currentid=$(el).find('label').attr('for');
+								//crearli(currentarea,currentname);
+								//alert(currentname + '   ' + currentid);
+								 //alert(listviewselectedindex);
+								 var listView = document.querySelector(".listView").winControl;
+								 var list = listView.itemDataSource.list;
+								 if(listviewselectedindex!=undefined){
+								 var item = list.getAt(listviewselectedindex);
+								 
+								 crearli(currentarea,item.title);
+							
+						
+					             }
+								// var selection = listView.selection; //listView.currentItem;
+								 //if(selection.count()) {
+    							 //	selection.getItems().then(function(items) {
+       								 // do something with the selected item
+       							//		 alert(items[0].title); 
+    							//		}
+
+								 //}
+								 //alert(item.title);
+								 
+								
+								
+								clearTimeout( dropAreaTimeout );
+								dropAreaTimeout = setTimeout( afterDropFn, 400 );
+							}
+						}
+					} );
+				} );
+			   }
+			//)();
+			
+			var foldedrs =[];
+			
+			
+			function disable(e)
+			{
+				//var handsOff = new OriDomi(e, { touchEnabled: false });
+				
+				
+			}
+         
+		 	
+		
+		</script>
+		
+		
+		<input name="list1SortOrder" type="hidden" />
+
+	<script type="text/javascript">
+	    var xname=0;
+		
+		//var asorte=[] ;
+		
+		function inisorted(){
+			
+			$('.list2').find('ul').forEach(function (it){
+				
+				var editableList= Sortable.create($(it).get(0), {
+		        animation: 150,
+				filter: '.js-remove',
+				onFilter: function (evt) {
+				evt.item.parentNode.removeChild(evt.item);
+				}
+	    	});
+				
+			});
+			}
+		function crearli(e,cname){
+			xname= xname+1;
+			
+			//$(e).find(".list2").append("<li><div ><span class='contentx'>"+cname.toString()+"</span><span id='close' onclick='closediv(this);'>x</span></div></li>");
+			//find("ul")
+			$(e).append("<div class='contentx' onclick='removefile(this);'>"+cname.toString()+"<i class='js-remove'>✖</i></div>");
+			//dragadr(e);
+			
+			//var editableList=$(e).find("ul").get(0);
+			
+		    //var el = document.createElement('li');
+			//el.innerHTML = cname + '<i class="js-remove">✖</i>';
+			//editableList.el.appendChild(el);
+			
+			//saveOrder(e);
+		}
+		function removefile(e){
+			$(e).remove();
+		}
+		function clearul(e){
+			
+			$(e).find(".list2").empty();
+			saveOrder();
+		}
+		
+		function closediv(e){
+			
+			e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode); 
+			saveOrder(e);
+			return false;
+			
+			
+		}
+		function dragadr(e){
+		
+		//$(e).find(".list2").dragsort("destroy");
+		//$(e).find(".list2").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder,
+		 //placeHolderTemplate: "<li class='placeHolder'><div></div></li>" });
+		
+		
+		
+		
+         }
+		
+		function saveOrder(e) {
+			//var data =  $("#list2 li").map(function() { return $(this).children().html(); }).get();
+			//$("input[name=list1SortOrder]").val(data.join("|"));
+			var data = $(e).find(".list2 li div").map(function() { return $(this).children().html(); }).get();
+			$("input[name=list1SortOrder]").val(data.join("|"));
+		};
+		
+		
+		
+		
+		
+	</script>
+    
+		<script src="../js/jquery.fittext.js"></script>
+		<script src="../js/boxgrid.example2.js"></script>
+		<script src="../js/classie.js"></script>
+		<script src="../js/uisearch.js"></script>
+		<script>
+			new UISearch( document.getElementById( 'sb-search' ) );
+		</script>
+		
+		
+	</body>
+</html>

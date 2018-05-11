@@ -1,0 +1,77 @@
+﻿.win-listview > .win-vertical .win-item.listIconTextTemplate
+{
+    width: calc(100% - 2*.7%);
+    height: calc(70px - 2*.7%); 
+    
+    overflow: hidden;
+
+    padding: 0.7%;
+}
+
+.listIconTextItem-Image {
+    width: 60px;
+    height: 60px;
+}
+
+.listIconTextTemplate .listIconTextItem-Image
+{
+    margin: 1%;                  
+    float: left;                  
+}
+
+.listLayoutHeaderTemplate, .listLayoutHeaderTemplate {
+    font-size: larger;
+    margin-left: 3%;
+}          
+
+.listView
+{
+    height: 100%;
+    width: 100%;
+}
+
+.listViewSection
+{
+    width: 38%;
+    height: 76%;
+    margin-top: 5%;
+    margin-left: 1.5%;
+    float: left;
+}
+
+@media (max-width: 1366px) and (min-width: 851px){
+    .listViewSection{
+         width: 45%;
+         margin-left: 3%;
+    }
+}
+
+@media (max-width: 850px) and (min-height: 600px){
+   .listViewSection{
+       width: 80%;
+       margin-top: 10%;
+   }
+}
+
+@media (max-width: 850px) and (max-height: 599px) {
+    .listViewSection{
+        width: 60%;
+    }
+}
+
+select {
+  min-width: 80px;
+  min-height: 32px;
+  background-clip: border-box;
+  margin: 4px 0px;
+  outline: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.333;
+  color:#000;
+  background-color:#ffffff;
+}
+select::-ms-expand {
+    color: #000;
+}
+

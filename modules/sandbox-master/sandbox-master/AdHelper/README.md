@@ -1,0 +1,1 @@
+Moved to [http://github.com/createjs/html5ads/](http://github.com/createjs/html5ads/).

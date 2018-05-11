@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://gridster.net/demos/resize.html -->
+<html hc="a0" hcx="0"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta name="msapplication-tap-highlight" content="no">
+     
+  <title>Section</title>
+  <!--<link rel="stylesheet" type="text/css" href="../css/jquery.gridster.css"> 8421018019743-->
+     <link rel="stylesheet" type="text/css" href="../css/jquery.gridster2.css">
+    <!--<link rel="stylesheet" type="text/css" href="../css/templatesize.css">-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css" >
+    <link href="../css/ui-dark.css" rel="stylesheet">
+    <script src="../winjs/base.min.js"></script>
+    <script src="../winjs/ui.min.js"></script>
+    <!-- jquery  -->
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+   <!-- <script type="text/javascript" src="../js/jquery.min.js"></script>-->
+   <!-- Bootstrap -->
+   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <!-- Handlebars -->
+  <script type="text/javascript" src="../js/handlebars.js"></script>
+
+        <!-- Custom Files -->
+       
+         <link rel="stylesheet" type="text/css" href="../css/_protogridster.css">
+        
+        
+        
+         <link rel="stylesheet" type="text/css" href="../css/style.css" >
+         <link rel="stylesheet" type="text/css" href="../css/tab.css" >
+        <!--<script src="../js/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>-->
+        <script src="../js/jquery.gridster.with-extras.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/store.js"></script>  
+        <script src="../js/bugatools.js"></script> 
+        
+		<script src="../js/gridsterdeploy.js?v="+ ramdonversion()></script>
+		
+		<script src="../js/configform.js?v="+ ramdonversion()"></script>	
+		
+        <script src="../js/tab.js"></script>
+        <script type="text/javascript" src="../module/soundjs/lib/soundjs-NEXT.combined.js"></script>
+        <script type="text/javascript" src="../module/soundjs/lib/easeljs-NEXT.min.js"></script>
+        <script src="../module/soundjs/lib/preloadjs-NEXT.min.js"></script>
+          <script type="text/javascript" src="../module/soundjs/lib/ScaleBitmap.js"></script>
+        
+        <style type="text/css"> 
+        
+        .test {
+              background-color: #36A000;
+              z-index: 2;
+              height:86%; 
+        }
+        .gridster li {
+        outline: 0px white solid;
+        z-index: 0;
+        box-shadow: 0 0 0px 0px #000000;
+        }
+        
+        
+        
+        .playsound{
+            
+             background: #34495e; /* Old browsers */
+             background: -moz-linear-gradient(left, #2c3e50 0%, #34495e 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#2c3e50), color-stop(100%,#34495e)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #2c3e50 0%,#34495e 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, #2c3e50 0%,#34495e 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #2c3e50 0%,#34495e 100%); /* IE10+ */
+    background: linear-gradient(to right, #2c3e50 0%,#34495e 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c3e50', endColorstr='#34495e',GradientType=1 ); /* IE6-9 */
+
+    -webkit-box-shadow: inset 0px 0px 1px 1px #34495e;
+    box-shadow: inset 0px 0px 1px 1px #34495e;   
+
+    color: #fff; 
+            
+        }
+    
+     .viewclass{
+       
+       opacity: 0;
+       
+       
+     }
+   
+   .canvasclass{
+     
+    }
+ 
+</style>
+
+<link rel="stylesheet" type="text/css"  id="defaultstylesection" href="../css/defaultstylesection.css" >
+ 
+   <script type="text/javascript">
+
+      
+    function showConfirmFlyout() {
+      
+    var buyButton = document.getElementById("section1settings");
+    $("#confirmFlyout").toggle();
+    var settingstittle = document.getElementById("settingstittle");
+    
+    if(selectitemxs!=undefined)
+    {
+        
+        settingstittle.innerHTML="Widget " + selectitemxs.innerHTML;
+    }
+    else{
+        
+        settingstittle.innerHTML="No Widget Selected";
+    }
+    }
+ 
+    
+  
+  
+  </script>
+</head>
+<!--style="background:transparent" style="background: -webkit-canvas(mybackground);"-->
+<body style="background:transparent" >
+ 
+
+ <div style="position:relative;width:100%;color:#000;z-index:100" >
+ <!--<a style="float:right;font-size:1.5em;" id="filter" href="">sorted alphabeticallyxxxxxx</a> 
+           <a href="#" onclick="creategrid();">create </a>
+        <a href="#" onclick="addWid();">AddWidget </a>
+        <a href="#" onclick="removeWid();">RemoveWidget </a>-->
+   
+   <!--   <button id="section1settings" data-win-control="WinJS.UI.AppBarCommand" style="float:right;" 
+ data-win-options="{id:'cmd',  icon:'settings'}" type="button"></button>
+   
+  <button id="section1minus" data-win-control="WinJS.UI.AppBarCommand" style="float:left" 
+ data-win-options="{id:'cmd',  icon:'remove'}" type="button"></button>
+ <button id="section1Add" data-win-control="WinJS.UI.AppBarCommand" style="float:left" 
+data-win-options="{id:'cmd',  icon:'add'}" type="button"></button>
+<ul  class="nav nav-pills">
+			<li class="active">
+        <a  href="#" data-toggle="tab">Mode1</a>
+			</li>
+			<li><a href="#" data-toggle="tab" onclick="">Mode2</a>
+			</li>
+			  <li><a href="#" data-toggle="tab">Mode3</a>
+			</li>		
+		</ul>
+</div>-->
+<input id="testFile" type="file" style="display:none">
+<!-- Scenario Controls 
+<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs" style="text-aling:center;z-index:100">
+      <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+        <li role="presentation">
+          <a href="#" role="tab" id="show-tab" data-toggle="tab" aria-controls="show" aria-expanded="true">
+            <span class="text">show</span>
+          </a>
+        </li>
+        <li role="presentation" class="active">
+          <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" >
+            <span class="text">mode1</span>
+          </a>
+        </li>
+        <li role="presentation" class="next">
+          <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">
+            <span class="text">mode2</span>
+          </a>
+        </li>
+        <li role="presentation" class="dropdown">
+          <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">
+            <span class="text">actions</span>
+            <span class="caret">
+            </span>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents" style="z-index:10000">
+            <li>
+              <a href="#dropdown1"  tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">
+                <span>add widget</span>
+              </a>
+            </li>
+            <li>
+              <a href="#dropdown2"  tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">
+                <span>remove widget</span>
+              </a>
+            </li>
+            <li>
+              <a href="#dropdown3"  tabindex="-1" role="tab" id="dropdown3-tab" data-toggle="tab" aria-controls="dropdown3">
+                <span>desing</span>
+              </a>
+            </li>
+            <li>
+              <a href="#dropdown4"  tabindex="-1" role="tab" id="dropdown4-tab" data-toggle="tab" aria-controls="dropdown4">
+                <span>preview</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li role="presentation">
+          <a href="#settings" role="tab" id="settings-tab" data-toggle="tab" aria-controls="settings">
+            <span class="text" onclick="showSettings();">settings</span>
+          </a>
+        </li>
+        
+      </ul>-->
+      <div id="myTabContent" class="tab-content" style="position:fixed;z-index:1000;
+      display: none; background-color:#333;opacity:0.9;width:90%;height:90%">
+        <div role="tabpanel" class="tab-pane fade in active" id="settings" aria-labelledby="settings-tab">
+           <div>layout</div>
+           <textarea id="log" style="display:block;position:relative;width:90%;height:90%"></textarea>
+           <div>config</div>
+           <textarea id="config" style="display:block;position:relative;width:90%;height:90%"></textarea>
+		   <div id="1a" style="display:block;position:relative;width:90%;height:90%"></div>
+        </div>
+      
+      </div>
+    
+  <!-- Scenario Controls -->
+<div id="confirmFlyout"  aria-label="{Confirm purchase flyout}"   
+style="display:none;width:95%;position:absolute;z-index:100; opacity: 0.85;
+    filter: alpha(opacity=85);  border-style: solid;
+    border-color: #0000ff #0000ff;height:70%">
+    <div id="settingstittle" style="width:300px;margin-left:20%">Settings</div>
+   <ul  class="nav nav-pills">
+			<li class="active">
+        <a  href="#1a" data-toggle="tab" onclick='CreateReaderControlSection();'>section</a>
+        
+			</li>
+			<li><a href="#2a" data-toggle="tab"  onclick='CreateReaderControlWidget();' >widget</a>
+			</li>
+            <li><a href="#3a" data-toggle="tab" onclick='CreateReaderControlCreateWidget();'>create widget</a>
+			</li>
+            <li><a href="#4a" data-toggle="tab" onclick=''>re-use widget</a>
+			</li>
+			 	
+		</ul>
+         <button id="section2minus" data-win-control="WinJS.UI.AppBarCommand" 
+            style="float:right;margin-top:-2%; margin-right:5%" 
+            data-win-options="{id:'cmd',  icon:'remove'}" type="button"></button>
+        <div class="tab-content clearfix" style="height:100%;text-aling:center;top:0px;display:block">
+			    <div class="tab-pane" id="1a" style="height:100%;top:0px;margin-top:0%">
+                </div>
+				<div class="tab-pane" id="2a" style="height:100%">
+                <div class="container">
+                <div class="row">
+                <div class="col-md-12">
+                <div id="form" class="">
+                </div>
+                </div>
+                </div>
+                </div>
+	            </div>
+                <div class="tab-pane" id="3a" style="height:100%">
+                   
+                </div>
+                 <div class="tab-pane" id="4a" style="height:100%">
+                   
+                </div>
+  </div>
+     
+</div>
+
+    <!--style="margin-top:0%;overflow:scroll;width:100%;height:100%"-->
+  <div class="gridster" style="position:relative;margin-top:0%;;width:100%;height:100%;display:flex">
+    <ul class="transparent" id="gridPage" style="z-index:100; display: flex">
+     
+    </ul>
+    
+
+     <canvas id="demoCanvas"   width="100%" height="100%" style="z-index=-100;position:flex;top:10%; display: inline;top: 0;bottom: 0;left: 0;right: 0;">
+        alternate content
+ </canvas>
+  </div>
+
+
+  <script src="../js/_widget.js?v="+ramdonversion()></script>
+  
+  
+</body></html>
+
+	
+
+
