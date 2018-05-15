@@ -33,4 +33,6 @@
 		{ ID: "29", title: "Sprite", text: "Transparency BackGround",category: "Animation", captionclass:"caption transparent",classname:"tile blue title-scaleup imagetile w2 h1 isotope-item", picture: "../images/documents/60Lemon.png" }
 		
 		
-    ];
+];
+
+inite(myData_temp);

@@ -2,7 +2,8 @@
  var selectitemxs;
  var _sectionConfig;
  var _widgetConfig;
- var _user='12345';
+ var _user = '12345';
+ var _currentsource;
  function generateUUID(){
     var d = new Date().getTime();
     if(window.performance && typeof window.performance.now === "function"){
@@ -451,4 +452,16 @@
 
          console.log(executeFunctionByName(name,window));
          //return data;
+     }
+
+     function AddSource() {
+
+         var _source = getAllUrlParams().source;
+         ///de aca se escoje la fuente
+         _currentsource = _source;
+         //cargar al eligir si son tempaltes, codigos etc.
+         var pathsource = "../data/" + _source + ".js?v = " + ramdonversion();
+         dynamicInsert2(pathsource);
+
+
      }

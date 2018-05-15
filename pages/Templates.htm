@@ -19,377 +19,114 @@
     <!--<link rel="stylesheet" href="../css/cosmo/bootstrap.min.css" type="text/css">-->
     <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="../css/style.css" type="text/css">
+	 
+   
 	
-    <script>
-
-        var _source=getAllUrlParams().source;
-        ///de aca se escoje la fuente
-
-       //cargar al eligir si son tempaltes, codigos etc.
-        //alert(_data);
-        //var _source = "documents";
-        var pathsource = "../data/" + _source + ".js?v = " + ramdonversion();
-        dynamicInsert2(pathsource);
-
-    </script>
-     
-	<!--<script src="../data/documents.js?v=" + ramdonversion()></script>-->
     <!--<script src=pathsource ></script>-->
     <script src="../js/garbageCan.js"></script> 
 	<script src="../js/initializetemplate.js"></script> 
-    <script>       
-       var listviewselectedindex;
-          //document.domain = "mydomain.com";
-       function seletecteditemlist(noti) {
-       
-        try{
-        var listView = document.querySelector(".listView").winControl;
-	    var list = listView.itemDataSource.list;
-		if(noti !=undefined){
-		listviewselectedindex=noti;
-		}
-		
-		if(listviewselectedindex!=undefined)
-        {
-		 var item = list.getAt(noti);
-		 //alert(item.ID);
-         store.set('_currentTemplate',_user.toString() + '-' + item.ID) ;
-			
-         window.parent.loadsection(noti);          
-        }
-        }
-        catch(e){
-            
-            alert('error temp' + e.message);
-            
-        }
-        
-    }
-    </script>
-     
-     
-    <style>
-        
-        
-.win-listview .win-groupheader
-{
-    font-size: 1em;
-    font-family: Arial, Helvetica, sans-serif;
-    
-    
-}
-        
-.win-listview.win-groups .win-vertical 
-.win-listlayout .win-groupleader, 
-.win-listview.win-groups .win-vertical 
-.win-gridlayout .win-groupleader  
-{
-    margin-top:10px;
-}      
-/* Template for headers in the zoomed-in ListView */
-.simpleHeaderItem
-{
-     
-    padding: 1px;
-    top:-50px;
-    font-size: 1em;
-    
-}   
-
-/* Template for items in the zoomed-in ListView */  
- .mediumListIconTextItem {
-	width: 120px;
-	height: calc(100% - 38px);
-	border: 1px solid silver;
-	margin-top: 4px;
-    height: 140px;
-}
-
-.mediumListIconTextItem.wide {
-	min-width: 120px;
-	width: calc(100% - 5px);
-}
-
-    .mediumListIconTextItem img.mediumListIconTextItem-Image 
-    {
-        width: 50px;
-        height: 50px;
-        margin: 5px;
-        -ms-grid-column: 1;
-          color: #fff;
-    }
-
-    .mediumListIconTextItem .mediumListIconTextItem-Detail
-    {
-        margin: 0px;
-        -ms-grid-column: 2;
-    }
-
-/* Template for items in the zoomed-out ListView */
-.semanticZoomItem
-{
-    width: 130px;
-    height: 130px;
-    background-color: rgba(38, 160, 218, 1.0);
-}   
-
-    .semanticZoomItem .semanticZoomItem-Text
-    {
-        padding: 10px;
-        line-height: 120px;
-        white-space: nowrap;
-        color: white;
-       
-    }
-
-/* CSS for the zoomed-in ListView 
-#zoomedInListView
-{
-  width: 100%;
-  height: 100%;
-    
-}*/
-
-#semanticZoomDiv 
-{
-    margin-top:5%; 
-    width: 100%;
-    height: 90%;
-    
-    
-}
-
-.minus{
-    
-    width:auto;
-    float:right;
-    font-size:3em;
-    margin-left:40px;
-    border:1px;
-    text-align :right;
-    vertical-align: top;
-    z-index: 100;
-    top:-15%;
-    margin-bottom:150px;
-    
-}
+    <script src="../js/_template.js"></script> 
+    <!--<script src="../data/documents.js?v=" + ramdonversion()></script>-->
 
 
-.groupheader{
-    
-    font-size:2em;
-    color: #ccc;
-    width:100%;
-}
+                                <style>
+                                            .win-listview .win-groupheader {
+                                                font-size: 1em;
+                                                font-family: Arial, Helvetica, sans-serif;
+                                            }
 
-.captioncolor{
-    clear: both;
-    color:black !important;
-    font-weight: bold;
-    
-}
+                                            .win-listview.win-groups .win-vertical .win-listlayout .win-groupleader,
+                                            .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
+                                                margin-top: 10px;
+                                            }
+                                            /* Template for headers in the zoomed-in ListView */
+                                            .simpleHeaderItem {
+                                                padding: 1px;
+                                                top: -50px;
+                                                font-size: 1em;
+                                            }
+
+                                            /* Template for items in the zoomed-in ListView */
+                                            .mediumListIconTextItem {
+                                                width: 120px;
+                                                height: calc(100% - 38px);
+                                                border: 1px solid silver;
+                                                margin-top: 4px;
+                                                height: 140px;
+                                            }
+
+                                                .mediumListIconTextItem.wide {
+                                                    min-width: 120px;
+                                                    width: calc(100% - 5px);
+                                                }
+
+                                                .mediumListIconTextItem img.mediumListIconTextItem-Image {
+                                                    width: 50px;
+                                                    height: 50px;
+                                                    margin: 5px;
+                                                    -ms-grid-column: 1;
+                                                    color: #fff;
+                                                }
+
+                                                .mediumListIconTextItem .mediumListIconTextItem-Detail {
+                                                    margin: 0px;
+                                                    -ms-grid-column: 2;
+                                                }
+
+                                            /* Template for items in the zoomed-out ListView */
+                                            .semanticZoomItem {
+                                                width: 130px;
+                                                height: 130px;
+                                                background-color: rgba(38, 160, 218, 1.0);
+                                            }
+
+                                                .semanticZoomItem .semanticZoomItem-Text {
+                                                    padding: 10px;
+                                                    line-height: 120px;
+                                                    white-space: nowrap;
+                                                    color: white;
+                                                }
+
+                                            /* CSS for the zoomed-in ListView
+                                    #zoomedInListView
+                                    {
+                                      width: 100%;
+                                      height: 100%;
+
+                                    }*/
+
+                                            #semanticZoomDiv {
+                                                margin-top: 5%;
+                                                width: 100%;
+                                                height: 90%;
+                                            }
+
+                                            .minus {
+                                                width: auto;
+                                                float: right;
+                                                font-size: 3em;
+                                                margin-left: 40px;
+                                                border: 1px;
+                                                text-align: right;
+                                                vertical-align: top;
+                                                z-index: 100;
+                                                top: -15%;
+                                                margin-bottom: 150px;
+                                            }
 
 
+                                            .groupheader {
+                                                font-size: 2em;
+                                                color: #ccc;
+                                                width: 100%;
+                                            }
 
-</style>
-
- 
-
-
-<script>
-    
-    (function () {
-    "use strict";     
-    // Create a WinJS.Binding.List from the array. 
-    try{
-    var itemsList = new WinJS.Binding.List(myData_temp);
-    }
-    catch(e){
-        
-        alert(e.message);
-        
-    }
- // Sorts the groups.
-    function compareGroups(leftKey, rightKey) {
-        return leftKey.charCodeAt(0) - rightKey.charCodeAt(0);
-    }
-
-    // Returns the group key that an item belongs to.
-    function getGroupKey(dataItem) {
-        return dataItem.category.toLowerCase();//dataItem.title.toUpperCase().charAt(0);
-    }
-
-    // Returns the title for a group.
-    function getGroupData(dataItem) {
-        return {
-            title:dataItem.category.toLowerCase() //dataItem.title.toUpperCase().charAt(0)
-        };
-    }
-
-    // Create the groups for the ListView from the item data and the grouping functions
-    var groupedItemsList = itemsList.createGrouped(getGroupKey, getGroupData, compareGroups);
-    //Show the flyout
-    function showConfirmFlyout() {
-    
-    var sz= document.getElementById("semanticZoomDiv").winControl;
-    
-	if(sz.zoomedOut==true){
-	sz.zoomedOut=false;
-	}
-    else{
-	sz.zoomedOut=true;
-	}      
-    }
-    
-	function showSettings() {
-    
-    var x= document.getElementById("semanticZoomDiv");
-	var y= document.getElementById("semanticform");
-    
-        if (x.style.display === "none") {
-        x.style.display = "block";
-		 y.style.display = "none";
-		
-		
-    } else {
-        x.style.display = "none";
-		
-		CreateReaderControl('../forms/DynamicForm.html','','semanticform');
-
-		y.style.display = "inline-block";
-		y.style.height = document.height/2;
-		y.style.height = document.height;	
-
-    }
-
-		
-   
-    }
-	
-	
-    WinJS.Namespace.define("myData",
-        {
-            groupedItemsList: groupedItemsList
-        });
-        
-	 function itemDragStartHandler(event) {
-        
-		var indi=Notifications.getIndices(event);
-		
-         //alert(indi);
-        
-        Notifications.itemDragStart(event);
-
-    
-    // Pass indices of dragged items into event so they're available for later drag events
-	    var indic=event.detail.dragInfo.getIndices().toString();
-		
-		var listView = document.querySelector(".listView").winControl;
-	    var list = listView.itemDataSource.list;	
-		
-		
-		 var item = list.getAt(indic);
-		 //alert(item.ID);
-         //store.set('_currentTemplate',_user.toString() + '-' + item.ID) ;
-		var jitem=JSON.stringify(item);
-		
-        //event.detail.dataTransfer.setData('text', '{"ID":' + item.ID + ',' + '"category":' + '"' + item.category + '"' + ',' + '"title"' + '"' + item.title + '"' + '}');
-		event.detail.dataTransfer.setData("text", jitem);
-        event.detail.dataTransfer.effectAllowed = "all";
-
-        //Dragging.garbageCan.activate();
-    }
-
-    function itemDragEndHandler(event) {
-		 //alert(event);
-        Notifications.itemDragEnd(event);
-        //Dragging.garbageCan.deactivate();
-    }
-		
-	
-		
-    WinJS.UI.processAll().then(function () {
-         
-		 
-		 
-		 
-    document.getElementById("section1minus").addEventListener("click", function(){
-	
-	var xd=document.getElementById("section1minus").winControl;
-	var sz= document.getElementById("semanticZoomDiv").winControl;
-	
-	if(sz.zoomedOut==true){
-	
-	xd.icon='zoomout';
-	}else{
-	xd.icon='zoomin';
-	}
-	
-	showConfirmFlyout();
-	
-	
-	}, false);
-	
-	document.getElementById("section1settings").addEventListener("click", function(){
-	
-	var x= document.getElementById("semanticZoomDiv");
-	var y= document.getElementById("semanticform");
-    
-        if (x.style.display === "none") {
-        x.style.display = "block";
-		 y.style.display = "none";
-		
-    } else {
-        x.style.display = "none";
-		
-		CreateReaderControl('../forms/DynamicForm.html','','semanticform');
-
-		y.style.display = "inline-block";
-		y.style.height = document.height/2;
-		y.style.height = document.height;	
-		
-		}
-	
-	
-	
-	
-	}, false);
-    
-	
-	
-	var listView = document.querySelector("#listViewx").winControl;
-    listView.itemsDraggable = true;
-    //document.getElementById("notificationBanner").addEventListener("change", selectlistview, false);
-    
-    //var listView = document.querySelector(".listView").winControl;
-    listView.addEventListener("iteminvoked", function(eventInfo){
-	
-	      
-	      var index = eventInfo.detail.itemIndex;
-		  seletecteditemlist(index);
-	
-	}, false);
-	
-	
-	
-    listView.addEventListener("groupheaderinvoked", Notifications.groupHeaderInvoked, false);
-    
-	listView.addEventListener("itemdragstart", itemDragStartHandler, false);
-        
-    listView.addEventListener("itemdragend", itemDragEndHandler, false);
-	    
-	
-    });
-
-	
-	
- // WinJS.UI.processAll();  	
-
-})(); // End of data.js
-
-    
-</script>
-
+                                            .captioncolor {
+                                                clear: both;
+                                                color: black !important;
+                                                font-weight: bold;
+                                            }
+                                </style>
 
 </head>
 <body style="width:100%;height:100%;background: black ">
@@ -459,9 +196,9 @@
               <div class="listIconTextTemplate win-selectionstylefilled listView" id="listViewx"
              data-win-control="WinJS.UI.ListView"
              data-win-options="{ itemDataSource: myData.groupedItemsList.dataSource,
-         itemTemplate: select('.listIconTextTemplate'), groupHeaderTemplate: 
-         select('#headerTemplate'), 
-         groupDataSource: myData.groupedItemsList.groups.dataSource, 
+             itemTemplate: select('.listIconTextTemplate'), groupHeaderTemplate: 
+             select('#headerTemplate'), 
+              groupDataSource: myData.groupedItemsList.groups.dataSource, 
          footer: select('.footer'),
         
          selectionMode: 'single', tapBehavior: 'directSelect', swipeBehavior: 'none',layout: {type: WinJS.UI.GridLayout,orientation:'vertical'}

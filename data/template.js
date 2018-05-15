@@ -44,4 +44,6 @@ var myData_temp = [
     { ID:"20",  title: "bugatoon en la educacion", text: "monster siloutte",category: "presentacion",  
         captionclass:"caption transparent captioncolor", picture: "../images/templates/presentacionedu.jpg",classname:"tile blue title-scaleup imagetile w2 h1 isotope-item" }    
          
-    ];
+];
+
+inite(myData_temp);

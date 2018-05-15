@@ -19,7 +19,7 @@ Copyright (c) Microsoft Corporation. All rights reserved
     <style >              
 
         .win-pivot-header {
-            font-size:x-small !important;
+            font-size:small !important;
         }
     </style>
 	
@@ -393,21 +393,25 @@ function clockStop() {
           
             <div data-win-control="WinJS.UI.Hub"  >
                  
-                <div class="hero sectionlist margint" data-win-control="WinJS.UI.HubSection" data-win-options="{header: '',isHeaderStatic: true}">
+                <div class="hero sectionlist margint" data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'Modules',isHeaderStatic: true}">
 
                     <div id="messageList" data-win-control="WinJS.UI.Pivot" data-win-options="{ selectedIndex: 0 }">
 
-                        <div class="pivotItem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Templates' }" style="font-size:xx-small">
+                        <div class="pivotItem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Templates' }">
                             <iframe src="Templates.htm?source=template" width="99%" height="95%">
                                 <p>Your browser does not support iframes.</p>
                             </iframe>
                         </div>
-                        <div class="pivotItem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Documents' }" style="font-size:xx-small">
+                        <div class="pivotItem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Modules' }" >
                             <iframe src="Templates.htm?source=documents" width="99%" height="95%">
                                 <p>Your browser does not support iframes.</p>
                             </iframe>
                         </div>
-
+                        <div class="pivotItem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'Gallery' }">
+                            <iframe src="Templates.htm?source=gallery" width="99%" height="95%">
+                                <p>Your browser does not support iframes.</p>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
                 <div class="hero sectionbug" style="overflow:hidden;"  data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'Composition',isHeaderStatic: true}">

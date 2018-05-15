@@ -170,7 +170,7 @@
                     //var audioPath = "assets/";
                     //var handle=handleLoadComplete;
                     initialized(handleLoadComplete);
-                   var assetsPath = "../audio/";
+                    var assetsPath = "../audio/";
 		                
                     
                     //var sounds = [
@@ -1202,8 +1202,7 @@ onResize( element, changesize );
 	//var preload;
 	function opendocumentsettings(documentid,widgetid){
 		
-		    var doc=JSON.parse(documentid);
-		    
+		    var doc=JSON.parse(documentid);		    
 			createdocument(doc,widgetid);
 		    var contentDialog = document.querySelector(".win-contentdialog").winControl;
 			contentDialog.addEventListener("beforehide", cancelDismissal, false);
@@ -1249,14 +1248,9 @@ onResize( element, changesize );
 	}
 
 
-	function get_module_widget(widget) {
-
-	    var modname = [];
-
-
-
+    function get_module_widget(widget)
+    {  var modname = [];
 	    return modname;
-
 	}
 
 	// Load a single asset.
