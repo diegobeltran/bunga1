@@ -1,2 +1,1 @@
-﻿//usario 12345- template-19- module-1 widget 1
-'{"ModuleName": "background","Actions": [{ "typeAction": "click","mode": 0},{"typeAction": "click","mode": 1}],"Files": [ {"type": "CSS","pathfile": "../modules/m_1/background.css"},{"type": "JavaScript", "pathfile": "../modules/m_1/background.js"}],"Code_text": "","Document Number": 1,"Widget Number": 1}'
+﻿'{"ModuleName": "background","Description":"test modulo","Category":"Javascript","Actions": [{ "typeAction": "click","mode": 0},{"typeAction": "click","mode": 1}],"Files": [ {"type": "CSS","pathfile": "../modules/m_1/background.css"},{"type": "JavaScript", "pathfile": "../modules/m_1/background.js"}],"Code_text": "","DocumentNumber": 1,"WidgetNumber": 1}'
