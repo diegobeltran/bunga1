@@ -1045,7 +1045,7 @@
 
                    //var element = document.getElementById(ii);
                    
-
+               //EJECUTAR EL METODO QUE TRAE LOS MODULOS QUE CONTIENE UN WIDGET
                if (_arrayModule.length > currentwidgettmp) {
 
                    var ii = 0;
@@ -1056,7 +1056,32 @@
 
                        if (_name == _arrayModule[ii])
                        {
-                           alert(_name);
+                           //alert(_name);
+                           var arraym = executeFunctionByName(_name, window);
+                           
+                           console.log(arraym);
+                           if (arraym != undefined) {
+
+                           var arrayms = JSON.parse(arraym);
+                           for (iii = 0; iii < arrayms.module.length; iii++) {
+
+                               var pt = "" + sectionname + "-"  + currentwidgettmp + "_" + arrayms.module[iii];
+
+                               var _f1 = "get_module_" + pt;
+
+                               _f1 = replaceAll(_f1, "-", "_");
+
+                               alert(_f1);
+
+                               var modulos = executeFunctionByName(_f1, window);
+
+                               var modulo = JSON.parse(modulos);
+                               
+                               createListitem();
+
+
+                           }
+                           }
 
                        }
                    }
@@ -1076,7 +1101,12 @@
               
           }
           
-	
+function createListitem(id,Name,Description,category,image) {
+
+    var item = { ID: id, title: Name, text: Description, category: category, captionclass: "caption transparent", classname: "tile blue title-scaleup imagetile w2 h1 isotope-item", picture: image }
+
+    return item;
+}
 	function loadWidgetConfig(data) {
       //alert("Symbol: " + data.symbol + ", Price: " + data.price);
         //alert(data);

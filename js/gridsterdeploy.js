@@ -3,7 +3,7 @@
  var onlywidget=false;    
  var currentTemplate; 
  var _previewmode  =false;
- var _editmode  =false;
+ var _editmode  =true;
  var _paramshow;
   var timerId;  
    var sounds;
