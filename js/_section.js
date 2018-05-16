@@ -1043,14 +1043,16 @@
                var modulesItem = [];
 
                //Carga los modulos pertenecientes a un widget en un template
+               console.log('inicio loadModuleWidget');
                modulesItem = loadModuleWidget(sectionname, currentwidgettmp);                   
-               
+               console.log('fin loadModuleWidget');
                if (modulesItem.length > 0) {
                    
                    var ii = 0;
                    var modulesResume = [];
-                   for (ii = 0; ii < _arrayModule.length; ii++)
-                   {   var item = createListitem2(modulo.ModuleName, modulo.Description);
+                   for (ii = 0; ii < modulesItem.length; ii++)
+                   {
+                       var item = createListitem2(modulesItem[ii].ModuleName, modulesItem[ii].Description);
                        modulesResume.push(item);
                    }
 
@@ -1386,7 +1388,7 @@ onResize( element, changesize );
 	    
 	    //myNameSpace.MyApp = MyApp;
 	   
-	     alert("sixxx");
+	     //alert("sixxx");
          //myNameSpace.test();
 	    //createEvents();
 	}
