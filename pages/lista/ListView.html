@@ -1,13 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!-- saved from url=(0066)http://winjs.azurewebsites.net/pages/listview/options/default.html -->
-<html class="win-hoverable" hc="a0" hcx="0"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html class="win-hoverable" hc="a0" hcx="0"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <title>ListView Test</title>
 
     <!-- WinJS references -->
     <link href="./css/ui-dark.css" rel="stylesheet">
     <script src="./winjs/base.min.js"></script>
-    <script src="./winjs/ui.min.js"></script><style></style>
+    <script src="./winjs/ui.min.js"></script>
+    <style></style>
 
     <!-- Other Library references-->
     <script src="./js/highlight.pack.js"></script>
@@ -33,6 +35,8 @@
     <script src="./js/garbageCan.js"></script>
     <script src="./js/simpleFlipper.js"></script>
     <script src="./js/gitHubIssue.js"></script>
+    <!--<script src="../js/store.js"></script>-->
+    <script src="../../js/store.js"></script>
 </head>
 <body class="win-type-body">
     
@@ -45,8 +49,8 @@
         </div>
     </div>
 
-    <button onclick="add();"> jjjjjjjjjjjjjjjjjj</button>
-    <div class="controlBoxArea">
+    <button onclick="add();"> Add</button>
+    <div class="controlBoxArea" style="display:none">
     </div>
         
     <div class="listViewSection" style="display: block; opacity: 1;">
@@ -107,5 +111,10 @@ listView.itemsDraggable = <span class="hljs-literal">true</span>;
   }
   
 </script>
-
+    <script>
+         
+        Config.itemsDraggable(1);
+        Config.tapBehavior(1);
+  
+</script>
 </body></html>

@@ -12,6 +12,10 @@
         window.addEventListener("resize", function () {
             ListView.listView.recalculateItemPosition();
         }, false);
+
+        
+        //listView.
+
     }
 
     function addListViewEventListeners(listView) {

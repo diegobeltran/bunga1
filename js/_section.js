@@ -1036,61 +1036,27 @@
                ////////////////////////////////////////////////////
 			   //CreateReaderControl('widget.htm','?_target=widget','section3');
 			   
-               currentwidget=currentwidgettmp;
-               //CreateReaderControlCreateWidget();
-               //var _currtemplate = store.get('_currentTemplate');
+               currentwidget = currentwidgettmp;
 
+               store.set('_currentWidgetModules', null);
 
+               var modulesItem = [];
+
+               //Carga los modulos pertenecientes a un widget en un template
+               modulesItem = loadModuleWidget(sectionname, currentwidgettmp);                   
                
-
-                   //var element = document.getElementById(ii);
+               if (modulesItem.length > 0) {
                    
-               //EJECUTAR EL METODO QUE TRAE LOS MODULOS QUE CONTIENE UN WIDGET
-               if (_arrayModule.length > currentwidgettmp) {
-
                    var ii = 0;
-                   for (ii = 0; ii < _arrayModule.length; ii++) {
-
-                       var pt = "c" + sectionname + "_" + currentwidgettmp;
-                       var _name = replaceAll("get_m_w_" + pt, "-", "_");
-
-                       if (_name == _arrayModule[ii])
-                       {
-                           //alert(_name);
-                           var arraym = executeFunctionByName(_name, window);
-                           
-                           console.log(arraym);
-                           if (arraym != undefined) {
-
-                           var arrayms = JSON.parse(arraym);
-                           for (iii = 0; iii < arrayms.module.length; iii++) {
-
-                               var pt = "" + sectionname + "-"  + currentwidgettmp + "_" + arrayms.module[iii];
-
-                               var _f1 = "get_module_" + pt;
-
-                               _f1 = replaceAll(_f1, "-", "_");
-
-                               alert(_f1);
-
-                               var modulos = executeFunctionByName(_f1, window);
-
-                               var modulo = JSON.parse(modulos);
-
-
-                               console.log(modulo.DocumentNumber);
-                               
-                               createListitem(modulo.DocumentNumber, modulo.ModuleName, modulo.Description, modulo.category);
-
-                           }
-                           }
-
-                       }
+                   var modulesResume = [];
+                   for (ii = 0; ii < _arrayModule.length; ii++)
+                   {   var item = createListitem2(modulo.ModuleName, modulo.Description);
+                       modulesResume.push(item);
                    }
-                   //var functionname = _arrayModule[currentwidgettmp-1];
-                   //alert(functionname);
-               }
-               
+                   store.set('_currentWidgetModules', modulesResume);
+
+                   CreateReaderControl('/pages/lista/ListView.html', '', 'bottom_pane');
+               }   
 
            }
            
@@ -1102,7 +1068,71 @@
            }
               
           }
-          
+
+function loadModuleWidget(sectionname, currentwidgettmp) {
+
+    //EJECUTAR EL METODO QUE TRAE LOS MODULOS QUE CONTIENE UN WIDGET
+    //_arrayModule array donde se guardan los metodos de cada widget si se encuentra es porq se cargo en el sistema
+    var modulesItem = [];
+    if (_arrayModule.length > currentwidgettmp) {
+
+        var ii = 0;
+        
+        for (ii = 0; ii < _arrayModule.length; ii++) {
+
+            var pt = "c" + sectionname + "_" + currentwidgettmp;
+            var _name = replaceAll("get_m_w_" + pt, "-", "_");
+
+            if (_name == _arrayModule[ii]) {
+                //alert(_name);
+                var arraym = executeFunctionByName(_name, window);
+
+                console.log(arraym);
+                if (arraym != undefined) {
+
+                    var arrayms = JSON.parse(arraym);
+                    for (iii = 0; iii < arrayms.module.length; iii++) {
+
+                        var pt = "" + sectionname + "-" + currentwidgettmp + "_" + arrayms.module[iii];
+
+                        var _f1 = "get_module_" + pt;
+
+                        _f1 = replaceAll(_f1, "-", "_");
+
+                        //alert(_f1);
+
+                        var modulos = executeFunctionByName(_f1, window);
+
+                        var modulo = JSON.parse(modulos);
+
+
+                        console.log(modulo.DocumentNumber);                                             
+
+                        modulesItem.push(modulo);
+
+                    }
+
+
+                }
+
+            }
+        }
+
+        /////////////
+        return modulesItem;
+    }
+
+
+
+
+}
+function createListitem2( Name, Description, image) {
+
+    var item = { title: Name, text: Description, picture: "../../images/fruits/60Mint.png" }
+
+    return item;
+}
+
 function createListitem(id,Name,Description,category,image) {
 
     var item = { ID: id, title: Name, text: Description, category: category, captionclass: "caption transparent", classname: "tile blue title-scaleup imagetile w2 h1 isotope-item", picture: image }

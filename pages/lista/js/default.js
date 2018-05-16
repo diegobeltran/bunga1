@@ -14,7 +14,11 @@
     };
 
     app.onactivated = function (args) {
-        var data = new WinJS.Binding.List(ListView.Data.createData());
+
+        var list=store.get('_currentWidgetModules');
+        
+        var data = new WinJS.Binding.List(ListView.Data.createData2(list));
+        //alert("datacreada");
         var groupedData = ListView.Data.groupData(data);
         var smallData = new WinJS.Binding.List(data.slice(0, 100));
         var smallGroupedData = ListView.Data.groupData(smallData);

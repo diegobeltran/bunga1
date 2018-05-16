@@ -26,6 +26,16 @@
         return items;
     }
 
+    function createData2(bindingList) {
+        var items = [];
+
+        for (var i = 0; i < bindingList.length; i++) {
+            items.push(bindingList[i]);
+        }
+        return items;
+    }
+
+
     function groupData(bindingList) {
         var groupedData = bindingList.createGrouped(function (item) {
             // Items will be sorted into groups based on this value
@@ -150,6 +160,7 @@
 
     WinJS.Namespace.define("ListView.Data", {
         createData: createData,
+        createData2: createData2,
         groupData: groupData,
         addElement: addElement,
         deleteElement: deleteElement,
