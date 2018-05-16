@@ -1076,9 +1076,11 @@
                                var modulos = executeFunctionByName(_f1, window);
 
                                var modulo = JSON.parse(modulos);
-                               
-                               createListitem();
 
+
+                               console.log(modulo.DocumentNumber);
+                               
+                               createListitem(modulo.DocumentNumber, modulo.ModuleName, modulo.Description, modulo.category);
 
                            }
                            }
