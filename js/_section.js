@@ -1053,8 +1053,8 @@
                    {   var item = createListitem2(modulo.ModuleName, modulo.Description);
                        modulesResume.push(item);
                    }
-                   store.set('_currentWidgetModules', modulesResume);
 
+                   store.set('_currentWidgetModules', modulesResume);
                    CreateReaderControl('/pages/lista/ListView.html', '', 'bottom_pane');
                }   
 
