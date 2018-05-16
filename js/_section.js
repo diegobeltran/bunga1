@@ -5,6 +5,8 @@
        var dragGridEnabled = false;
        var _currentMode=0;
        var functionName;
+       var _arrayModule = [];
+      
        var ratio=window.innerWidth/window.innerHeight;
 	   
        //alert(window.innerHeight);
@@ -237,9 +239,10 @@
 
             var longitud = $(".gridster ul").find('li').length;
 
-            var _currtemplate = store.get('_currentTemplate');
-
             var man = [];
+
+            var _currtemplate = store.get('_currentTemplate');
+                   
 
             for (ii = 1; ii <= longitud; ii++) {
 
@@ -247,7 +250,7 @@
                 var pt = "c" + _currtemplate + "-" + ii ;
                 var _name=replaceAll("get_m_w_" + pt,"-","_");
                 //alert(functionName);
-                pt+= ".js";
+                pt += ".js?v=" +ramdonversion();
                 var item = {
                     src: pt,
                     id: _name
@@ -404,9 +407,7 @@
                                // alert("for");
                             //var element = document.getElementById(ii);
                             var pt = "" + _currtemplate + "-" + ii + "-" + _pj.module[yu] ;
-                            
-                           
-                            
+                                                                                   
                             var _f1= "get_module_" + pt;
                             _f1 =replaceAll(_f1,"-","_");
 
@@ -436,7 +437,10 @@
 
                             //alert(_pj.module[0] + " fn");
                             //return;
-							 elements.push(element);
+                        elements.push(element);
+                        var clickProxy = createjs.proxy(execute, this, element, null, "click");
+                        element.addEventListener("click", clickProxy);
+
                         }
 		                //alert(man);
 		                
@@ -1003,33 +1007,64 @@
     	 ///////////////////////carga el widget
 
     var currentwidget;          
-    
+    //Crear el formulario cargar los modulos por widget al dar click
 	function createwidget()
           {
               //return;
        try{
 	       
 		   
-             var currentwidgettmp=store.get('_currentWidget');
+           var currentwidgettmp=store.get('_currentWidget');
            
-           if(currentwidgettmp != undefined && (currentwidgettmp !=currentwidget) )
+           //if(currentwidgettmp != undefined && (currentwidgettmp !=currentwidget) )
+           //{
+           if (currentwidgettmp != undefined )
            {
-		   
+
 		        //alert(currentwidgettmp);
+               ///////////////////////////////formulario con informacion del widget
                var sectionname=  store.get('_currentTemplate');
                
 			   //sectionname=_user.toString() + '-' + sectionname;
 			   
                var widgetfile='config/widget/'+ sectionname + '-' + currentwidgettmp + '.js?v='+ramdonversion();
+
                //alert(widgetfile);
-		       
-			   
+		       	   
 			   dynamicInsert(widgetfile);
-               
+
+               ////////////////////////////////////////////////////
 			   //CreateReaderControl('widget.htm','?_target=widget','section3');
 			   
                currentwidget=currentwidgettmp;
                //CreateReaderControlCreateWidget();
+               //var _currtemplate = store.get('_currentTemplate');
+
+
+               
+
+                   //var element = document.getElementById(ii);
+                   
+
+               if (_arrayModule.length > currentwidgettmp) {
+
+                   var ii = 0;
+                   for (ii = 0; ii < _arrayModule.length; ii++) {
+
+                       var pt = "c" + sectionname + "_" + currentwidgettmp;
+                       var _name = replaceAll("get_m_w_" + pt, "-", "_");
+
+                       if (_name == _arrayModule[ii])
+                       {
+                           alert(_name);
+
+                       }
+                   }
+                   //var functionname = _arrayModule[currentwidgettmp-1];
+                   //alert(functionname);
+               }
+               
+
            }
            
            }
@@ -1225,27 +1260,27 @@ onResize( element, changesize );
 	}
 
 
-	function loadModule(template, widget, module) {
+	//function loadModule(template, widget, module) {
 
 
 
-	}
+	//}
 
 
 
-	function loadModules(template, widget) {
+	//function loadModules(template, widget) {
 
-	    var pt = "c" + template + "-" + widget + ".js";
-        //alert(pt);
-	    console.log(pt);
-	    var item = {
-	        src: pt,
-	        id: pt
-	    };
+	//    var pt = "c" + template + "-" + widget + ".js";
+ //       //alert(pt);
+	//    console.log(pt);
+	//    var item = {
+	//        src: pt,
+	//        id: pt
+	//    };
 
-	    preload.loadManifest({ path: "config/widget/", manifest: [item] });
+	//    preload.loadManifest({ path: "config/widget/", manifest: [item] });
 
-	}
+	//}
 
 
     function get_module_widget(widget)
@@ -1284,16 +1319,17 @@ onResize( element, changesize );
 	    createEvents();
 
 	}
-
+    //funcion final de carga 
 	function handleLoadComplete2(event) {
 	    
 	    //myNameSpace.MyApp = MyApp;
 	   
-	    alert("sixxx");
+	     alert("sixxx");
          //myNameSpace.test();
 	    //createEvents();
 	}
 
+    
 	function handleFileLoaded(event) {
 	    var item = event.item;
 	    var id = item.id;
@@ -1330,13 +1366,15 @@ onResize( element, changesize );
 	                result.text=result.text.replace('xxx',item.id);
 	                //alert(result.text);
 	                //var a=result.text.split(",");
-	                rec_data2(result.text,item.id);
+                    rec_data2(result.text, item.id);
 
-	            }else
+                    _arrayModule.push(functionName);
+
+                }
+                else
                 if(functionName.indexOf("get_module_")>-1)
 	            {
-	                
-                    
+	                          
                     rec_data2(result.text,item.id);
 	            }
                 //document.body.appendChild(result);
@@ -1413,6 +1451,7 @@ onResize( element, changesize );
 	
 	function execute(event,target,module,eventName) {
 
+        //alert('click');
 	    
 	    switch (event.type) {
 
@@ -1421,7 +1460,8 @@ onResize( element, changesize );
 	            if (_editmode == false) {
 	                //playSound(target.id);
 	                //click_function(target);
-	            } else {
+                } else
+                {
 	                createwidget();
 	            }
 	            break;
