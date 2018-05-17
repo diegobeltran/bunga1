@@ -27,6 +27,7 @@
 
  function CreateReaderControl(page, query, div) {
 
+     //alert($('#' + div));
      $('#' + div).empty();
 
      $('<iframe>', {
@@ -39,7 +40,24 @@
 
      }).appendTo('#' + div);
 
- }
+}
+
+function CreateReaderControlFromElement(page, query, div) {
+
+    //alert($('#' + div));
+    $(div).empty();
+
+    $('<iframe>', {
+        src: page + query,
+        id: 'ifrmID' + '_' + div,
+        frameborder: 0,
+        scrolling: 'yes',
+        width: '99%',
+        height: "100%"
+
+    }).appendTo(div);
+
+}
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      

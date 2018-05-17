@@ -21,6 +21,35 @@ Copyright (c) Microsoft Corporation. All rights reserved
         .win-pivot-header {
             font-size:small !important;
         }
+
+        .main-nav,
+        .main {
+            position: relative;
+        }
+
+        .main-nav {
+            background-color:transparent;
+            height: 80px;
+            z-index: 150;
+            margin-bottom: -80px;
+            box-shadow: 0 2px 3px rgba(0,0,0,.4);
+        }
+
+        header,
+        .main-nav-scrolled {
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+
+        .main {
+            background-color: transparent;
+            padding: 110px 50px 50px;
+            column-count: 2;
+            column-gap: 40px;
+        }
+
+
     </style>
 	
     <script src="../js/base.min.js"></script>	
@@ -52,13 +81,17 @@ Copyright (c) Microsoft Corporation. All rights reserved
 		
 		}  
 		  
-		 //repli('../css','href','link',yourCodeToBeCalled);
-		 //alert('dmmmmd');
-		 //repli('../js','src','script',yourCodeToBeCalled);
-	     
-		 //replacejscssfile("/base.min.js", "../js/base.min.js", "js")
-		 //Notifications.itemInvoked
-		 //listView.addEventListener("itemInvoked", Notifications.itemDragEnter, false);
+        var mn = $(".main-nav");
+        mns = "main-nav-scrolled";
+        hdr = $('#main_content').height();
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > hdr) {
+                mn.addClass(mns);
+            } else {
+                mn.removeClass(mns);
+            }
+        });
 		
 </script>		 
 <script>		
@@ -234,8 +267,8 @@ function clockStop() {
 </head>
 <body >
     
-      <img src="../images/templates_1/filebackground.jpg" class="background bgwidth" alt="">
-	  
+      <!--<img src="../images/templates_1/filebackground.jpg" class="background bgwidth" alt="">-->
+    <img src="" class="background bgwidth" alt="">
        <div id="split1" class="splitView" data-win-control="WinJS.UI.SplitView" data-win-options="{
             openedDisplayMode: 'overlay',
             closedDisplayMode: 'none'
@@ -336,7 +369,7 @@ function clockStop() {
        
        
     <!-- The content that will be loaded and displayed. -->
-    <div class="fragment verticallayout fullScreen"  >
+    <div class="fragment verticallayout fullScreen" id="main_content"  >
 
         <div id="appHeader"  style="width:100%;color:aquamarine">
          <div style="width:100%">
@@ -345,8 +378,8 @@ function clockStop() {
             data-win-control="WinJS.UI.SplitViewPaneToggle"
             data-win-options="{ splitView: select('#split1') }">
             </button>
-            <div id="central_bar" style="top:-10px;float:left;width:90%;background-color:darkgray">
-                <div id="section1minus" style="display: block;text-align:center; background-color:aquamarine;width:90%">
+            <div id="central_bar" class="main-nav" style="top:-10px;float:left;width:90%;background-color:darkgray">
+                <div id="section1minus" style="display: block;text-align:center; width:90%">
                     nbsp
                 </div>
              </div>

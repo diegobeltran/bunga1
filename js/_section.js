@@ -1296,14 +1296,19 @@ function AddModuleResumeList(module) {
 }
 
 function createList() {
+    //'bottom_pane'
+    console.log('ini createList');
 
+   var element= $(window.parent.central_bar);
+    alert(element);
     if (_fullScreen) {
-        CreateReaderControl('/pages/lista/ListView.html', '', 'bottom_pane');
+        
+        CreateReaderControlFromElement('/pages/lista/ListView.html', '', element );
     } else {
-        CreateReaderControl('/pages/lista/ListView.html', '', 'bottom_pane');
+        CreateReaderControlFromElement('/pages/lista/ListView.html', '', element);
     }
    
-
+    console.log('fin createList');
 }
 
 

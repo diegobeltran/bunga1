@@ -39,7 +39,7 @@
     <script src="../../js/store.js"></script>
     <script src="../../js/jquery.min.js"></script>
 </head>
-<body class="win-type-body" style="top:0px">
+<body class="win-type-body" style="top:-30px">
     
     <!-- Simple inline template for ListView-->
     <div class="listIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
@@ -49,11 +49,11 @@
             <h6 class="win-h6" data-win-bind="textContent: text"></h6>
         </div>
     </div>
-    <div style="display:block">
+    <div style="display:none">
         <button onclick="add();"> Add</button>
     </div>
     
-    <div class="controlBoxArea" style="display:block">
+    <div class="controlBoxArea" style="display:none">
     </div>
         
     <div class="listViewSection" style="display: block; opacity: 1;">
@@ -83,7 +83,7 @@ listView.itemsDraggable = <span class="hljs-literal">true</span>;
         </div>
     </div>
 
-    <div class="gitHubIssueOpener">
+    <div class="gitHubIssueOpener" style="display:none">
         <a class="win-link" href="#" target="_blank">
             
             
@@ -103,7 +103,7 @@ listView.itemsDraggable = <span class="hljs-literal">true</span>;
          
     </div>-->
 
-    <div class="notificationBanner" style="background-color: rgb(0, 122, 204);">onLoadingStateChanged().  First visible item: 16, last visible item: 20</div>
+    <div class="notificationBanner" style="background-color: rgb(0, 122, 204);display:none"></div>
        
 <script>
   
