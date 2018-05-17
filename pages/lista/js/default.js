@@ -11,6 +11,9 @@
         ExpandingFlipper.initFlipper();
         Dragging.initGarbageCan();
         Init.addClipboardEvents();
+
+        
+
     };
 
     app.onactivated = function (args) {
@@ -33,6 +36,13 @@
 
         args.setPromise(WinJS.UI.processAll().then(function () {
             Init.initializeListView();
+
+            //ListView.Data.addElement();
+            Config.itemsDraggable(1);
+            Config.tapBehavior(1);
+            Config.selectHeaderTapBehavior(1);
+            Config.itemsReorderable(1);
+
         }));
     };
 

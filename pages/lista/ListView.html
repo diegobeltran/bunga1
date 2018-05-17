@@ -37,19 +37,22 @@
     <script src="./js/gitHubIssue.js"></script>
     <!--<script src="../js/store.js"></script>-->
     <script src="../../js/store.js"></script>
+    <script src="../../js/jquery.min.js"></script>
 </head>
-<body class="win-type-body">
+<body class="win-type-body" style="top:0px">
     
     <!-- Simple inline template for ListView-->
     <div class="listIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
-        <img src="./ListView Test_files/default.html" class="listIconTextItem-Image" data-win-bind="src: picture">
+        <img src="#" class="listIconTextItem-Image" data-win-bind="src: picture">
         <div class="listIconTextItem-Detail">
             <h4 class="win-h4" data-win-bind="textContent: title"></h4>
             <h6 class="win-h6" data-win-bind="textContent: text"></h6>
         </div>
     </div>
-
-    <button onclick="add();"> Add</button>
+    <div style="display:block">
+        <button onclick="add();"> Add</button>
+    </div>
+    
     <div class="controlBoxArea" style="display:none">
     </div>
         
@@ -92,13 +95,13 @@ listView.itemsDraggable = <span class="hljs-literal">true</span>;
         
     </div>
      
-       <div class="garbageCan" style="opacity: 1;top:150px" id="garbageCan3">
+       <!--<div class="garbageCan" style="opacity: 1;top:150px" id="garbageCan3">
         
     </div>
 
     <div class="garbageCan" style="opacity: 1;" id="garbageCan">
          
-    </div>
+    </div>-->
 
     <div class="notificationBanner" style="background-color: rgb(0, 122, 204);">onLoadingStateChanged().  First visible item: 16, last visible item: 20</div>
        
@@ -108,13 +111,17 @@ listView.itemsDraggable = <span class="hljs-literal">true</span>;
     
     ListView.Data.addElement();
     Config.itemsDraggable(1);
+    Config.tapBehavior(2);
+    Config.selectHeaderTapBehavior(2);
   }
   
 </script>
     <script>
-         
-        Config.itemsDraggable(1);
-        Config.tapBehavior(1);
+        //$(document).ready(function () {
+        //    Config.itemsDraggable(1);
+        //    Config.tapBehavior(1);
+        //});
+        
   
 </script>
 </body></html>
