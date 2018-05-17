@@ -38,11 +38,14 @@
             Init.initializeListView();
 
             //ListView.Data.addElement();
+            Layout.setOrientation(0);
+            Layout.setLayout(1);
             Config.itemsDraggable(1);
+            Config.itemsReorderable(true);
             Config.tapBehavior(1);
             Config.selectHeaderTapBehavior(1);
-            Config.itemsReorderable(1);
-
+           
+           
         }));
     };
 

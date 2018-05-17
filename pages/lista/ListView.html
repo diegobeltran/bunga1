@@ -53,7 +53,7 @@
         <button onclick="add();"> Add</button>
     </div>
     
-    <div class="controlBoxArea" style="display:none">
+    <div class="controlBoxArea" style="display:block">
     </div>
         
     <div class="listViewSection" style="display: block; opacity: 1;">
@@ -111,8 +111,11 @@ listView.itemsDraggable = <span class="hljs-literal">true</span>;
     
     ListView.Data.addElement();
     Config.itemsDraggable(1);
-    Config.tapBehavior(2);
-    Config.selectHeaderTapBehavior(2);
+    Config.tapBehavior(1);
+      Config.selectHeaderTapBehavior(1);
+      Layout.setOrientation(1);
+      Layout.setLayout(1);
+      Config.changeItemTemplate('image');
   }
   
 </script>

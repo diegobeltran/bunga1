@@ -5,8 +5,28 @@
        ListView.listView.itemsReorderable = reorderable;
    }
 
-   function tapBehavior(behavior) {
-       ListView.listView.tapBehavior = behavior;
+    function tapBehavior(behavior) {
+
+        
+        switch (templateName) {
+            case 0:
+                ListView.listView.tapBehavior = WinJS.UI.TapBehavior.invokeOnly;
+                break;
+
+            case 1:
+                ListView.listView.tapBehavior = WinJS.UI.TapBehavior.directSelect;
+                break;
+
+            case 2:
+                ListView.listView.tapBehavior = WinJS.UI.TapBehavior.toggleSelect;;
+                break;
+
+            case 3:
+                ListView.listView.tapBehavior = WinJS.UI.TapBehavior.none;
+          break;
+
+        }
+      
    }
 
    function selectHeaderTapBehavior(behavior) {

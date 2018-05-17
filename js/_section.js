@@ -1,22 +1,14 @@
-
-   
        var gridster;
        var maxcols=25;
        var dragGridEnabled = false;
        var _currentMode=0;
        var functionName;
-       var _arrayModule = [];
-      
-       var ratio=window.innerWidth/window.innerHeight;
-	   
-       //alert(window.innerHeight);
-      var _pagewidth=window.innerWidth-(window.innerWidth*0.1);
-      
-	  var calheight=(_pagewidth/maxcols)+1;
-     
-      var calwidht=calheight;
-     
-	 
+       var _arrayModule = [];      
+       var ratio=window.innerWidth/window.innerHeight;	   
+      var _pagewidth=window.innerWidth-(window.innerWidth*0.1);      
+	  var calheight=(_pagewidth/maxcols)+1;     
+      var calwidht=calheight;     
+      var _fullScreen = false;
 	  resize1a(window.innerHeight);
 	 
 	 
@@ -53,7 +45,7 @@
        {
        }
     
-         
+       _fullScreen = true;
        var importantStuff = window.open('section.htm?_target=section&_fs=true&_preview='+ _previewmode, '_blank');    
         //para control webview 
     
@@ -1057,7 +1049,7 @@
                    }
 
                    store.set('_currentWidgetModules', modulesResume);
-                   CreateReaderControl('/pages/lista/ListView.html', '', 'bottom_pane');
+                   createList();
                }   
 
            }
@@ -1279,25 +1271,43 @@ onResize( element, changesize );
     }
 	  
     var ifrm = document.getElementById("ifrmID_documentconfig");
-
 	    // using reference to iframe (ifrm) obtained above
 	var win = ifrm.contentWindow; // reference to iframe's window
 	    // reference to document in iframe
 	var doc = ifrm.contentDocument ? ifrm.contentDocument : ifrm.contentWindow.document;
 	    // reference to form named 'demoForm' in iframe
-	var form = doc.getElementById('output');
-	
+	var form = doc.getElementById('output');	
 	var _currentDocument = JSON.parse(form.value);
+        var _wid = store.get('_currentWidget');
+        _wid = _wid - 1;
+     AddModuleResumeList(_currentDocument);      
+     createList();
 
-	var _wid = store.get('_currentWidget');
-     _wid=_wid-1;
-	 
-     _modules[_wid] = _currentDocument;
-	//alert(_currentDocument.Files[0].pathfile);
-	//documentconfig
+        //FALTA CODIGO PARA GUARDAR
 	
 }
-	
+
+function AddModuleResumeList(module) {
+
+    var modulesResume=  store.get('_currentWidgetModules');
+    var item = createListitem2(module.ModuleName, module.Description);
+    modulesResume.push(item);
+    store.set('_currentWidgetModules', modulesResume);
+}
+
+function createList() {
+
+    if (_fullScreen) {
+        CreateReaderControl('/pages/lista/ListView.html', '', 'bottom_pane');
+    } else {
+        CreateReaderControl('/pages/lista/ListView.html', '', 'bottom_pane');
+    }
+   
+
+}
+
+
+
 	//var preload;
 	function opendocumentsettings(documentid,widgetid){
 		

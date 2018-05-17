@@ -223,8 +223,9 @@ function clockStop() {
 </script>
 <style>
   .margint{
-    margin-top:0px;
+    margin-top:-20px;
   }
+
   .win-hub-section-header-content{
    
    text-align:center;
@@ -335,18 +336,18 @@ function clockStop() {
        
        
     <!-- The content that will be loaded and displayed. -->
-    <div class="fragment verticallayout fullScreen" >
+    <div class="fragment verticallayout fullScreen"  >
 
-        <div id="appHeader"  style="width:100%" >
+        <div id="appHeader"  style="width:100%;color:aquamarine">
          <div style="width:100%">
             <button style="float:left;top:0px"
             class="win-splitviewpanetoggle"
             data-win-control="WinJS.UI.SplitViewPaneToggle"
             data-win-options="{ splitView: select('#split1') }">
             </button>
-            <div style="top:-10px;float:left">
-                <div id="section1minus" style="display: none">
-                bugaTOOn
+            <div id="central_bar" style="top:-10px;float:left;width:90%;background-color:darkgray">
+                <div id="section1minus" style="display: block;text-align:center; background-color:aquamarine;width:90%">
+                    nbsp
                 </div>
              </div>
             <button style="float:right;margin-right:20px"
@@ -393,7 +394,7 @@ function clockStop() {
           
             <div data-win-control="WinJS.UI.Hub"  >
                  
-                <div class="hero sectionlist margint" data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'Modules',isHeaderStatic: true}">
+                <div class="hero sectionlist margint" data-win-control="WinJS.UI.HubSection" data-win-options="{header: 'addOns',isHeaderStatic: true}">
 
                     <div id="messageList" data-win-control="WinJS.UI.Pivot" data-win-options="{ selectedIndex: 0 }">
 

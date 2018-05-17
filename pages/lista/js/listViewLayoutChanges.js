@@ -2,13 +2,26 @@
     "use strict";
 
     function setOrientation(orientation) {
+
         ListView.listView.layout.orientation = orientation;
+        ListView.listView.forceLayout();
     }
 
     function setLayout(layout) {
-        layout.orientation = ListView.listView.layout.orientation;
-        layout.groupHeaderPosition = ListView.listView.layout.groupHeaderPosition;
-        ListView.listView.layout = layout;
+        var layout1;
+        if (layout == 1) {
+            layout1 = new WinJS.UI.GridLayout();
+
+        }
+        else {
+
+            layout1 = new WinJS.UI.ListLayout();
+           
+        }
+        layout1.orientation = ListView.listView.layout.orientation;
+        layout1.groupHeaderPosition = ListView.listView.layout.groupHeaderPosition;       
+        ListView.listView.layout = layout1;
+        ListView.listView.forceLayout();
     }
 
     function groupItems(groupItems) {
