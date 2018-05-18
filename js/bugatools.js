@@ -467,7 +467,7 @@ function CreateReaderControlFromElement(page, query, div) {
          //=defscript;
          //alert(script.text);
          document.getElementsByTagName("body")[0].appendChild(script);
-
+         console.log('rec_data2');
          console.log(executeFunctionByName(name,window));
          //return data;
      }

@@ -252,7 +252,8 @@
 
                 //dynamicInsert('config/widget/' + pt);
             }
-
+            console.log("loadListModules");
+            console.log(man);
             preload.loadManifest(man, true, "config/widget/");
 
         }
@@ -354,7 +355,7 @@
                      //preload.addEventListener("fileload", handleLoadComplete2);
                        //var handle=handleLoadComplete2();
                        initialized(handleLoadComplete2);
-                 
+                        console.log('createEvents 1');
                         var _p= new _msg("1");
                         var man=[];
                         var cont=0;
@@ -377,11 +378,11 @@
                            // alert("no");
                             }
 		               
-                      
+                            console.log('createEvents 2');
                             //pueden ser muchos modulos por widget
                         if (_exists) {
                            
-
+                            console.log('createEvents 3');
                            // var sch = exbyname("get_modules_widget_" + ii,);
                             //executeFunctionByName("get_modules_widget_" + ii,window,0,_p)
                             //while (1 == 1) { }
@@ -391,12 +392,13 @@
                             _p.data= ejecutar(_f, _p);
                             
                             var _modulestmp=JSON.parse(_p.data);
-                           
+
+                            console.log(_modulestmp);
                             //Cargar los modulos
                             var yuy;
                             for (yuy = 0; yuy < _modulestmp.length; yuy++) {
 
-                                _pj = _modulestmp.module;
+                                _pj = _modulestmp[yuy].module;
 
                                 for (yu = 0; yu < _pj.module.length; yu++) {
                                     // alert("for");
@@ -404,10 +406,11 @@
                                     var pt = "" + _currtemplate + "-" + ii + "-" + _pj.module[yu] + "_" + _modulestmp[yuy].mode;
 
                                     var _f1 = "get_module_" + pt;
+
                                     _f1 = replaceAll(_f1, "-", "_");
 
                                     pt += ".js?v=" + ramdonversion();
-
+                                    alert(_f1);
                                     var item = {
                                         src: pt,
                                         id: _f1
@@ -1075,7 +1078,7 @@ function loadModuleWidget(sectionname, currentwidgettmp) {
 
                     for (yuy = 0; yuy < arrwidtmp.length; yuy++) {
 
-                        var arrayms = _modulestmp.module;
+                        var arrayms = _modulestmp[yuy].module;
 
                         for (iii = 0; iii < arrayms.module.length; iii++) {
 
