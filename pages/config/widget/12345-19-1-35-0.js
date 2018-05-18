@@ -1,0 +1,1 @@
+﻿'{"ModuleName": "BackGround Image","Description":"BackGround Image","Category":"Image","TypeModule":"Gallery","Actions": [{ "typeAction": "click","mode": 0},{"typeAction": "click","mode": 1}],"Files": [{"type": "Image", "pathfile": "../gallery/AndroidMarket.png"}],"Code_text": "","DocumentNumber": 35,"WidgetNumber": 1}'

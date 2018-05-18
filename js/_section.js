@@ -267,36 +267,34 @@
             //this.modelo = arguments[2];
         }
 
-        function loadModuleFiles(_currtemplate, widg, module){
+        //function loadModuleFiles(_currtemplate, widg, module){
         
         
-            var pt = "" + _currtemplate + "-" + widg + "-" + module ;
+        //    var pt = "" + _currtemplate + "-" + widg + "-" + module ;
             
-            pt="get_module_" + pt;
+        //    pt="get_module_" + pt;
 
-            var _f=replaceAll(pt,"-","_");
-            //alert("xx " + _f);
-            //alert(_f);
-            if(functionExists(_f)){
+        //    var _f=replaceAll(pt,"-","_");
+        //    //alert("xx " + _f);
+        //    //alert(_f);
+        //    if(functionExists(_f)){
             
-                alert('si');
+        //        alert('si');
 
-                var p = ejecutar(_f, null);
+        //        var p = ejecutar(_f, null);
 
-                alert(p);
+        //        alert(p);
             
-            }else{
-            
-            
+        //    }else{
             
             
-            }
-        
-        
-        
-        
-        
-        }
+            
+            
+        //    }  
+        //}
+
+
+
         function createEvents2(mod,element) {
 
             //_exists &&
@@ -391,67 +389,48 @@
                             //createEvents2(_p,element);
                             //alert('e');
                             _p.data= ejecutar(_f, _p);
-                            //alert('f')
-                            var _pj=JSON.parse(_p.data);
-                            //alert(_pj.module.length);
+                            
+                            var _modulestmp=JSON.parse(_p.data);
+                           
                             //Cargar los modulos
-                            for(yu=0;yu<_pj.module.length;yu++ ){
-                               // alert("for");
-                            //var element = document.getElementById(ii);
-                            var pt = "" + _currtemplate + "-" + ii + "-" + _pj.module[yu] ;
-                                                                                   
-                            var _f1= "get_module_" + pt;
-                            _f1 =replaceAll(_f1,"-","_");
+                            var yuy;
+                            for (yuy = 0; yuy < _modulestmp.length; yuy++) {
 
-                            pt += ".js?v=" + ramdonversion();
+                                _pj = _modulestmp.module;
 
-                            var item = {
-                            src: pt,
-                            id: _f1
-                            };
-                              
-                            man[cont]=item;
-                            cont=cont+1;
-                            //alert(ii);
-                           // dynamicInsert('config/widget/' + pt);
+                                for (yu = 0; yu < _pj.module.length; yu++) {
+                                    // alert("for");
+                                    //var element = document.getElementById(ii);
+                                    var pt = "" + _currtemplate + "-" + ii + "-" + _pj.module[yu] + "_" + _modulestmp[yuy].mode;
+
+                                    var _f1 = "get_module_" + pt;
+                                    _f1 = replaceAll(_f1, "-", "_");
+
+                                    pt += ".js?v=" + ramdonversion();
+
+                                    var item = {
+                                        src: pt,
+                                        id: _f1
+                                    };
+
+                                    man[cont] = item;
+                                    cont = cont + 1;
+                                }
+                            }
                             
-                            
-                            //var a= ejecutar(functionName, _p); 
-                              
-                            //alert(a);
-
-                            //loadModuleFiles(_currtemplate,ii,_pj.module[yu]);
-
-                            }                               
-
-
                         }
 
-                            //alert(_pj.module[0] + " fn");
-                            //return;
                         elements.push(element);
                         var clickProxy = createjs.proxy(execute, this, element, null, "click");
                         element.addEventListener("click", clickProxy);
 
-                        }
-		                //alert(man);
+                        }		               
 		                
-                        preload.loadManifest(man, true, "config/widget/");
-                       
-                        //var a= ejecutar("get_module_12345_19_1_1", null); 
-                              
-                        //alert(a);                      
-
-		                    //element.addEventListener("click", function() {
-						   //alert('xxxx2');
-                           //playSound(this.id);
-						   //clic_execute(this);						   
-	                       //});
+                        preload.loadManifest(man, true, "config/widget/");                       
 		                 
 		                }
                          
-                       //preload.loadManifest(man, true, "config/widget/");
-		                //alert(_p.data + "fin");
+                     
                 
 
 
@@ -695,10 +674,10 @@
     }
     // Scale up to fit width or height
    
-    	bg.graphics.clear();
-	   	bg.graphics.beginFill("#222").drawRect(0,0,stage.canvas.width,stage.canvas.height);
+    bg.graphics.clear();
+	bg.graphics.beginFill("#222").drawRect(0,0,stage.canvas.width,stage.canvas.height);
     // Center the shape
-     content.scaleX= w/h ;
+    content.scaleX= w/h ;
     content.scaleY =h/w ; 
     
     content.x = 0;
@@ -838,11 +817,11 @@
        function setimage(e,x,y,sizex,sizey,srcpath)
        {
                 var image = new Image();
-			          image.onload = function() { stage.update(); }
-			          image.src = srcpath;
+			    image.onload = function() { stage.update(); }
+			    image.src = srcpath;
                 var sb = new createjs.ScaleBitmap(image, new createjs.Rectangle(12, 12, 5, 10)).set({name:e.id + "_scb"});
                 sb.setDrawSize(sizex, sizey);
-                 sb.x=x;
+                sb.x=x;
                 sb.y=y;
                 stage.addChild(sb);
        }
@@ -1073,6 +1052,7 @@ function loadModuleWidget(sectionname, currentwidgettmp) {
     //EJECUTAR EL METODO QUE TRAE LOS MODULOS QUE CONTIENE UN WIDGET
     //_arrayModule array donde se guardan los metodos de cada widget si se encuentra es porq se cargo en el sistema
     var modulesItem = [];
+
     if (_arrayModule.length > currentwidgettmp) {
 
         var ii = 0;
@@ -1089,28 +1069,34 @@ function loadModuleWidget(sectionname, currentwidgettmp) {
                 console.log(arraym);
                 if (arraym != undefined) {
 
-                    var arrayms = JSON.parse(arraym);
-                    for (iii = 0; iii < arrayms.module.length; iii++) {
+                    var arrwidtmp = JSON.parse(arraym);
 
-                        var pt = "" + sectionname + "-" + currentwidgettmp + "_" + arrayms.module[iii];
+                    var yuy;
 
-                        var _f1 = "get_module_" + pt;
+                    for (yuy = 0; yuy < arrwidtmp.length; yuy++) {
 
-                        _f1 = replaceAll(_f1, "-", "_");
+                        var arrayms = _modulestmp.module;
 
-                        //alert(_f1);
+                        for (iii = 0; iii < arrayms.module.length; iii++) {
 
-                        var modulos = executeFunctionByName(_f1, window);
+                            var pt = "" + sectionname + "-" + currentwidgettmp + "_" + arrayms.module[iii] + "_" + arrwidtmp[yuy].mode;
 
-                        var modulo = JSON.parse(modulos);
+                            var _f1 = "get_module_" + pt;
 
+                            _f1 = replaceAll(_f1, "-", "_");
 
-                        console.log(modulo.DocumentNumber);                                             
+                            //alert(_f1);
 
-                        modulesItem.push(modulo);
+                            var modulos = executeFunctionByName(_f1, window);
 
+                            var modulo = JSON.parse(modulos);
+
+                            console.log(modulo.DocumentNumber);
+
+                            modulesItem.push(modulo);
+
+                        }
                     }
-
 
                 }
 
@@ -1343,28 +1329,6 @@ function createList() {
 	    preload.on("complete", _handleLoadComplete);
 	}
 
-
-	//function loadModule(template, widget, module) {
-
-
-
-	//}
-
-
-
-	//function loadModules(template, widget) {
-
-	//    var pt = "c" + template + "-" + widget + ".js";
- //       //alert(pt);
-	//    console.log(pt);
-	//    var item = {
-	//        src: pt,
-	//        id: pt
-	//    };
-
-	//    preload.loadManifest({ path: "config/widget/", manifest: [item] });
-
-	//}
 
 
     function get_module_widget(widget)

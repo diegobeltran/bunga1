@@ -1,0 +1,1 @@
+﻿'{"ModuleName": "background","Description":"test modulo","Category":"Javascript","TypeModule":"Module","Actions": [{ "typeAction": "click","mode": 0},{"typeAction": "click","mode": 1}],"Files": [ {"type": "CSS","pathfile": "../modules/m_1/background.css"},{"type": "JavaScript", "pathfile": "../modules/m_1/background.js"}],"Code_text": "","DocumentNumber": 1,"WidgetNumber": 1}'
