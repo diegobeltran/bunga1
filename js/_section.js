@@ -1047,6 +1047,11 @@
                        var item = createListitem2(modulesItem[ii].ModuleName, modulesItem[ii].Description);
                        modulesResume.push(item);
                    }
+                   //FALTA PRUEBAs
+                   for (ii = 0; ii < modulesItem.length; ii++) {
+                       var item = createListitem2(modulesItem[ii].ModuleName, modulesItem[ii].Description);
+                       modulesResume.push(item);
+                   }
 
                    store.set('_currentWidgetModules', modulesResume);
                    createList();
@@ -1300,12 +1305,12 @@ function createList() {
     console.log('ini createList');
 
    var element= $(window.parent.central_bar);
-    alert(element);
+    //alert(element);
     if (_fullScreen) {
         
-        CreateReaderControlFromElement('/pages/lista/ListView.html', '', element );
+        CreateReaderControlFromElement('/pages/lista/ListView.html?v =' +ramdonversion(), '', element );
     } else {
-        CreateReaderControlFromElement('/pages/lista/ListView.html', '', element);
+        CreateReaderControlFromElement('/pages/lista/ListView.html?v =' + ramdonversion(), '', element);
     }
    
     console.log('fin createList');

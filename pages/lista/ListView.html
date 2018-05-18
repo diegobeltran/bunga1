@@ -39,7 +39,7 @@
     <script src="../../js/store.js"></script>
     <script src="../../js/jquery.min.js"></script>
 </head>
-<body class="win-type-body" style="top:-30px">
+<body class="win-type-body" style="top:-30px;background-color:transparent">
     
     <!-- Simple inline template for ListView-->
     <div class="listIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
@@ -89,9 +89,10 @@ listView.itemsDraggable = <span class="hljs-literal">true</span>;
             
         </a>
     </div>
-    <button class="win-button listViewDocumentationToggle" style="display: block; opacity: 1;">Documentation</button>
-    
-      <div class="garbageCan" style="opacity: 1;top:50px" id="garbageCan2">
+    <div style="display:none ">
+        <button class="win-button listViewDocumentationToggle" style="display:none;opacity: 1;">Documentation</button>
+    </div>
+      <div class="garbageCan" style="opacity: 1;top:5px" id="garbageCan2">
         
     </div>
      
