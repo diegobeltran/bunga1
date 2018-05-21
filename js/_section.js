@@ -354,7 +354,7 @@
 
                      //preload.addEventListener("fileload", handleLoadComplete2);
                        //var handle=handleLoadComplete2();
-                       initialized(handleLoadComplete2);
+                        initialized(handleLoadComplete2);
                         console.log('createEvents 1');
                         var _p= new _msg("1");
                         var man=[];
@@ -398,19 +398,19 @@
                             var yuy;
                             for (yuy = 0; yuy < _modulestmp.length; yuy++) {
 
-                                _pj = _modulestmp[yuy].module;
+                                _pj = _modulestmp[yuy];
 
                                 for (yu = 0; yu < _pj.module.length; yu++) {
                                     // alert("for");
                                     //var element = document.getElementById(ii);
-                                    var pt = "" + _currtemplate + "-" + ii + "-" + _pj.module[yu] + "_" + _modulestmp[yuy].mode;
-
+                                    var pt = "" + _currtemplate + "-" + ii + "-" + _pj.module[yu] + "-" + _modulestmp[yuy].mode;
+                                    console.log('Ruta ' + pt);
                                     var _f1 = "get_module_" + pt;
 
                                     _f1 = replaceAll(_f1, "-", "_");
 
                                     pt += ".js?v=" + ramdonversion();
-                                    alert(_f1);
+                                    //alert(_f1);
                                     var item = {
                                         src: pt,
                                         id: _f1
@@ -428,7 +428,7 @@
                         element.addEventListener("click", clickProxy);
 
                         }		               
-		                
+                        console.log(man);
                         preload.loadManifest(man, true, "config/widget/");                       
 		                 
 		                }
@@ -1018,7 +1018,8 @@
 
                //Carga los modulos pertenecientes a un widget en un template
                console.log('inicio loadModuleWidget');
-               modulesItem = loadModuleWidget(sectionname, currentwidgettmp);                   
+               modulesItem = loadModuleWidget(sectionname, currentwidgettmp);  
+              
                console.log('fin loadModuleWidget');
                if (modulesItem.length > 0) {
                    
@@ -1064,26 +1065,45 @@ function loadModuleWidget(sectionname, currentwidgettmp) {
 
             var pt = "c" + sectionname + "_" + currentwidgettmp;
             var _name = replaceAll("get_m_w_" + pt, "-", "_");
-
+            console.log('loadModuleWidget 1');
             if (_name == _arrayModule[ii]) {
                 //alert(_name);
+                console.log('loadModuleWidget 2');
                 var arraym = executeFunctionByName(_name, window);
-
+                console.log('loadModuleWidget 3');
                 console.log(arraym);
+                console.log('loadModuleWidget 3');
                 if (arraym != undefined) {
-
-                    var arrwidtmp = JSON.parse(arraym);
+                    
+                    var arrtmptotal = JSON.parse(arraym);
+                    console.log('loadModuleWidget 4');
 
                     var yuy;
+                    var arrwidtmp;
+                    var arrayms;
+                    for (yuy = 0; yuy < arrtmptotal.length; yuy++) {
 
-                    for (yuy = 0; yuy < arrwidtmp.length; yuy++) {
+                        if (arrtmptotal[yuy].mode == _currentMode) {
 
-                        var arrayms = _modulestmp[yuy].module;
+                            arrayms = arrtmptotal[yuy];
+                        }                
 
+                    }
+                    console.log('loadModuleWidget 5'); 
+                    if (arrayms == undefined) {
+
+                        alert('Empty modules');
+                        return modulesItem;
+                    }                    
+
+                    //for (yuy = 0; yuy < arrayms.length; yuy++) {
+
+                        //var arrayms = arrwidtmp[yuy];
+                        console.log('loadModuleWidget 6'); 
                         for (iii = 0; iii < arrayms.module.length; iii++) {
-
-                            var pt = "" + sectionname + "-" + currentwidgettmp + "_" + arrayms.module[iii] + "_" + arrwidtmp[yuy].mode;
-
+                            console.log('loadModuleWidget 7'); 
+                            var pt = "" + sectionname + "-" + currentwidgettmp + "_" + arrayms.module[iii] + "_" + arrayms.mode;
+                            console.log('loadModuleWidget 8'); 
                             var _f1 = "get_module_" + pt;
 
                             _f1 = replaceAll(_f1, "-", "_");
@@ -1091,7 +1111,7 @@ function loadModuleWidget(sectionname, currentwidgettmp) {
                             //alert(_f1);
 
                             var modulos = executeFunctionByName(_f1, window);
-
+                            console.log('loadModuleWidget 9'); 
                             var modulo = JSON.parse(modulos);
 
                             console.log(modulo.DocumentNumber);
@@ -1099,7 +1119,7 @@ function loadModuleWidget(sectionname, currentwidgettmp) {
                             modulesItem.push(modulo);
 
                         }
-                    }
+                    //}
 
                 }
 
@@ -1375,7 +1395,7 @@ function createList() {
 	    
 	    //myNameSpace.MyApp = MyApp;
 	   
-	     //alert("sixxx");
+	     alert("sixxx");
          //myNameSpace.test();
 	    //createEvents();
 	}
